@@ -9,14 +9,12 @@
  * Put this header file into the 'r3bsource' directory and recompile.
  * */
 
-/*
 extern "C" {
 //#include "/home/bloeher/git/R3BRoot/r3bsource/ext_h101_full.h"
 //#include "ext_data_client.h"
-#include "/home/land/R3BRoot_PSPX/r3bsource/ext_h101_psp.h" 
-#include "/home/land/R3BRoot_PSPX/r3bsource/ext_h101_los.h" 
+#include "/u/sstorck/R3BRoot/r3bsource/ext_h101_psp.h" 
+//#include "/home/land/R3BRoot_PSPX/r3bsource/ext_h101_los.h" 
 }
-*/
 
 typedef struct EXT_STR_h101_t
 {
@@ -36,26 +34,33 @@ void unpack_beam_pspx(Int_t RunId=12)
 
     /* Create source using ucesb for input ------------------ */
      
-    TString filename = "/home/land/PSPX/lmd_s473/main"+runNumber+"_*.lmd"; //_00[0-9][0-9]
+//    TString filename = "/u/sstorck/lmds/lmd_s473/lustre/hebe/r3b/201902_s473/main"+runNumber+"_*.lmd"; //_00[0-9][0-9]
+    TString filename = "/lustre/hebe/r3b/201902_s473/main"+runNumber+"_*.lmd"; //_00[0-9][0-9] //Sn run <180 .../_s444, Sn runs >180 .../_s473
+    //TString filename = "/u/sstorck/nyx2/pspx/beam_181128/pspx1_pspx2_run"+runNumber+"_*.lmd"; //unpack testbeam ArAg
     //TString filename = "/home/land/PSPX/lmd_beamtest/pspx1_pspx2_run"+runNumber+"_0040.lmd"; //_00[0-9][0-9]
   
     //TString outputFileName = "/home/land/PSPX/rootfiles_tests/s473_tests/pspx_run"+runNumber+"_mapped.root";
-    TString outputFileName = "/home/land/PSPX/rootfiles_tests/s473_tests/pspx_run"+runNumber+"_cal.root";
+//    TString outputFileName = "/u/sstorck/nyx2/sstorck/rootfiles/s473/Sn_pspx_run"+runNumber+"_mapped.root";//posrun9_precal
+    TString outputFileName = "/lustre/land/sstorck/rootfiles/s473/pspx_run"+runNumber+"_mapped_testunpack.root";//posrun9_precal
 
-    TString ntuple_options = "UNPACK:EVENTNO,UNPACK:TRIGGER,RAW,PSPX";
+    TString ntuple_options = "RAW,PSPX";
     //TString ucesb_dir = getenv("UCESB_DIR");
     //TString ucesb_path = ucesb_dir + "/../upexps/jun16Xe/jun16Xe";
     //TString ucesb_path = "/home/land/upexps/kvi2018/kvi2018";
-    TString ucesb_path = "/home/land/upexps/201902_s473/201902_s473 --input-buffer=100Mi";
+    TString ucesb_path = "/u/sstorck/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; //Sn, alpha19
+    //TString ucesb_path = "/u/sstorck/upexps/201810_s444/201810_s444 --allow-errors";
+    //TString ucesb_path = "/u/sstorck/upexps/201902_s444/201902_s444 ";
     //TString ucesb_path = "/home/land/upexps/alpha18/kvi2018";
 
-    TString pspxpar_dir = "/home/land/R3BRoot_PSPX/psp/par/";
+    TString pspxpar_dir = "/u/sstorck/R3BRoot/psp/par/";
     TString parPspxMappedFileName = "s444_pspx_mapped_6det.par";
     //TString parPspxPrecalFileName = "s444_pspx_precal_190224_6det.par";
+    //TString parPspxPrecalFileName = "s444_pspx_precal_posrun9_4det.par";
     TString parPspxPrecalFileName = "s444_pspx_precal_default_6det.par";
     //TString parPspxPrecalFileName = "s444_pspx_precal_run197_pos1_en23_6det.par";
-    //TString parPspxCalFileName = "s444_pspx_cal_default_6det.par";
-    TString parPspxCalFileName = "s444_pspx_cal_run197_en123_6det.par";
+    TString parPspxCalFileName = "s444_pspx_cal_default_6det.par";
+    //TString parPspxCalFileName = "s444_pspx_cal_enrun8_4det.par";
+    //TString parPspxCalFileName = "s444_pspx_cal_run197_en123_6det.par";
     TString parPspxHitFileName = "s444_pspx_hit_default_6det.par";
     
     //TString parPspxPrecalFileName = "kvi2018_pspx_precal_default.par";
@@ -112,7 +117,7 @@ void unpack_beam_pspx(Int_t RunId=12)
     run->AddTask(pspxPrecal2Cal);
     R3BPspxCal2Hit* pspxCal2Hit = new R3BPspxCal2Hit("PspxCal2Hit", 1, 20);
     run->AddTask(pspxCal2Hit);
- /* */
+
     /* Initialize ------------------------------------------- */
     ((R3BPspxPrecalPar*)FairRuntimeDb::instance()->getContainer("R3BPspxPrecalPar"))->printparams();
     run->Init();

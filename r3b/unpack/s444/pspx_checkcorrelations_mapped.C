@@ -20,7 +20,7 @@
 #include "TLatex.h"
 
 #include "FairEventHeader.h"
-#include "/home/land/R3BRoot_PSPX/r3bbase/R3BEventHeader.h"
+#include "/u/sstorck/R3BRoot/r3bbase/R3BEventHeader.h"
 
 #include "Riostream.h"
 #include <sstream>
@@ -32,7 +32,7 @@
 using namespace std;
 using namespace TMath;
 
-void pspx_checkcorrelations_mapped(UInt_t run_min = 11, UInt_t run_max=13,UInt_t strip_f1=16, UInt_t strip_b1=48, UInt_t strip_f2=16, UInt_t strip_b2=48, UInt_t strip_f3=16, UInt_t strip_b3=48){
+void pspx_checkcorrelations_mapped(Double_t neve=0.1, UInt_t run_min = 11, UInt_t run_max=13,UInt_t strip_f1=16, UInt_t strip_b1=48, UInt_t strip_f2=16, UInt_t strip_b2=48, UInt_t strip_f3=16, UInt_t strip_b3=48){
 	
 	UInt_t verbosity_step_size=1000000; //number, how often progress of skript is reported
 	
@@ -40,21 +40,21 @@ void pspx_checkcorrelations_mapped(UInt_t run_min = 11, UInt_t run_max=13,UInt_t
 	UInt_t nStrips=32;
 	UInt_t npeaks=nStrips-1;
 	
-	UInt_t selectReadout=0; //0=energy,1=position
+	UInt_t selectReadout=1; //0=energy,1=position
 	Double_t minE=0;
-	Double_t maxE=500000;
+	Double_t maxE=40000;
 	Double_t minPos = -0.5;
 	Double_t maxPos = 0.5;
-	Double_t threshold = 5000.;
+	Double_t threshold = 1000.;
 	Double_t maxE_interstrip = 380000.;
-	Double_t neve=1.;
+
 	
 	//Input files  
 	TChain *fChain = new TChain("evt");
 	TString filename;
 	for(UInt_t i=run_min; i<=run_max; i++){
 		//filename = Form("/home/land/PSPX/rootfiles_tests/s473_tests/pspx_run0%03d_mapped.root", i);
-		filename = Form("/home/land/PSPX/rootfiles_tests/s473_tests/pspx_run0%03d_cal.root", i);
+		filename = Form("/u/sstorck/nyx2/sstorck/rootfiles/s444/pspx_run0%03d_mapped.root", i);
 		cout << "Open " << filename << endl;
 		fChain->Add(filename); 
 	}
@@ -473,11 +473,13 @@ void pspx_checkcorrelations_mapped(UInt_t run_min = 11, UInt_t run_max=13,UInt_t
 
 	
 	TCanvas * cEcorr = new TCanvas("cEcorr","PSP corr check",1200,800);
-	cEcorr->Divide(1,2);
+	cEcorr->Divide(2,2);
 	cEcorr->cd(1);
 	H_psp23sum->Draw("colz");
-	cEcorr->cd(2);
+	cEcorr->cd(3);
 	H_psp23->Draw("colz");
+	cEcorr->cd(4);
+	H_psp12->Draw("colz");
 }
 
 

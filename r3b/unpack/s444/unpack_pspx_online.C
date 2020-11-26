@@ -37,14 +37,19 @@ void unpack_pspx_online(Int_t run_nr = 1, Int_t date = 180821, Int_t detector = 
     /* Create source using ucesb for input ------------------ */
 
      //TString filename = "stream://x86l-30 --allow-errors"; //standalone DAQ
-//    TString filename = "stream://lxir123 --allow-errors"; //Main DAQ
-   TString filename = "stream://x86l-40 --allow-errors"; //Main DAQ, Eventbuilder
-     //TString outputFileName = "/tmp/pspx_stream_test.root";
+     //TString filename = "stream://lxir123 --allow-errors"; //Main DAQ
+     //TString filename = "stream://x86l-40 --allow-errors"; //Main DAQ, Eventbuilder
+     TString filename = "trans://lxg0898:8000 --allow-errors"; //Main DAQ, Eventbuilder
+  
+      //TString filename = "/d/land2/pspx/alpha19/190516_alpha_pspx1_run15_*.lmd"; //Main DAQ, Eventbuilder
+      //TString filename = "/d/land2/pspx/alpha19/20190527_califa_daq_test*.lmd"; //Main DAQ, Eventbuilder
+      //TString filename = "/u/sstorck/lmds/lmd_s473/lustre/hebe/r3b/201902_s473/main0227_*.lmd"; //Main DAQ, Eventbuilder
+      TString outputFileName = "/tmp/pspx_stream_test.root";
   //  TString filename = Form("/home/land/PSPX/lmd_tests/mounted/beam_181128/pspx1_pspx2_run19_000[1-9].lmd", run_nr);
-   // TString filename = Form("/home/land/PSPX/lmd_s444/main0137_*.lmd", run_nr);
-    TString outputFileName = Form("/home/land/PSPX/rootfiles_tests/s444_tests/s444_190225_online%i.root",run_nr);
+//    TString filename = Form("/d/land2/pspx/alpha19/190425_alpha_pspx1_run4_*.lmd", run_nr);
+   // TString outputFileName = Form("/home/land/PSPX/rootfiles//s444_190225_online%i.root",run_nr);
   //  TString outputFileName = Form("/home/land/PSPX/rootfiles_tests/s444_tests/test_online%i.root",run_nr);
-    TString ntuple_options = "RAW,PSPX";
+    TString ntuple_options = "RAW,CALIFA_F";
     // TString ucesb_dir = getenv("UCESB_DIR");
     // TString ucesb_path = ucesb_dir + "/../upexps/jun16Xe/jun16Xe";
 //    TString ucesb_path = "/lynx/Lynx/land/usr/land/landexp/kvi2018/upexps/kvi2018/kvi2018_001_060"; //--allow-errors
@@ -52,11 +57,12 @@ void unpack_pspx_online(Int_t run_nr = 1, Int_t date = 180821, Int_t detector = 
     
     
       //  TString ucesb_path = "/home/land/upexps/kvi2018/kvi2018"; //standalone unpacker
-        TString ucesb_path = "/home/land/upexps/201902_s473/201902_s473  --input-buffer=100Mi"; //main daq unpacker
+        //TString ucesb_path = "/u/sstorck/upexps/201902_s473/201902_s473 --allow-errors"; //main daq unpacker
+        TString ucesb_path = "/u/sstorck/upexps/pspx_califafw/pspx_califawr --allow-errors"; //main daq unpacker
     // TString ucesb_path = "/lynx/Lynx/land/usr/land/landexp/201810_s444/upexps/201810_s444/201810_s444";
     // //--allow-errors not yet working, PSPX not yet included
 
-    TString pspxpar_dir = "/home/land/R3BRoot_PSPX/psp/par/";
+    TString pspxpar_dir = "/u/sstorck/R3BRoot/psp/par/";
      TString parPspxMappedFileName = "s444_pspx_mapped_6det.par";
      TString parPspxPrecalFileName = "s444_pspx_precal_default_6det.par";
      TString parPspxCalFileName = "s444_pspx_cal_default_6det.par";
@@ -81,7 +87,7 @@ void unpack_pspx_online(Int_t run_nr = 1, Int_t date = 180821, Int_t detector = 
     const Int_t refresh = 100; // refresh rate for saving
     FairRunOnline* run = new FairRunOnline(source);
     run->SetRunId(runid);
-    run->ActivateHttpServer(refresh,1237);
+    run->ActivateHttpServer(refresh,2345);
 
     // To see the canvases open an internet browser and open localhost:8080 on the same machine or machinename:8080 from
     // within the same network
