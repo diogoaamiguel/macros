@@ -9,8 +9,9 @@
  * Put this header file into the 'r3bsource' directory and recompile.
  * */
 
-extern "C" {
-#include "/u/sstorck/R3BRoot/r3bsource/ext_h101_psp.h" 
+extern "C"
+{
+#include "/u/sstorck/R3BRoot/r3bsource/ext_h101_psp.h"
 }
 typedef struct EXT_STR_h101_t
 {
@@ -21,7 +22,7 @@ typedef struct EXT_STR_h101_t
 
 /*
  * To run this macro: root -l -b 'unpack_pspx_online.C()'
- * To change the range for the energy plots of the pspx, go to r3bbase/R3BOnlineSpectra.cxx, change the value Emax in
+ * To change the range for the energy plots of the pspx, go to psp/R3BPspxOnlineSpectra.cxx, change the value Emax in
  * Init() to a propriate number, recompile.
  */
 
@@ -37,35 +38,21 @@ void unpack_pspx_online_s515(Int_t run_nr = 200, Int_t RunId = 200)
     /* Create source using ucesb for input ------------------ */
 
     //  TString filename = "trans://lxir123:8030 --allow-errors"; //Main DAQ, Eventbuilder
-    TString filename = "/lustre/hebe/r3b/201902_s473/main"+runNumber+"_0001.lmd";
+    TString filename = "/lustre/hebe/r3b/201902_s473/main" + runNumber + "_0001.lmd";
 
-      
-      
-      //TString filename = "/d/land2/pspx/alpha19/190516_alpha_pspx1_run15_*.lmd"; //Main DAQ, Eventbuilder
-      //TString filename = "/d/land2/pspx/alpha19/20190527_califa_daq_test*.lmd"; //Main DAQ, Eventbuilder
-      //TString filename = "/u/sstorck/lmds/lmd_s473/lustre/hebe/r3b/201902_s473/main0227_*.lmd"; //Main DAQ, Eventbuilder
+    // Eventbuilder
     //   TString outputFileName = "/tmp/pspx_stream_test.root";
-      TString outputFileName = "/lustre/land/sstorck/rootfiles/s473/pspx_run"+runNumber+"_mapped_testonline.root";//posrun9_precal
-  //  TString filename = Form("/home/land/PSPX/lmd_tests/mounted/beam_181128/pspx1_pspx2_run19_000[1-9].lmd", run_nr);
-//    TString filename = Form("/d/land2/pspx/alpha19/190425_alpha_pspx1_run4_*.lmd", run_nr);
-   // TString outputFileName = Form("/home/land/PSPX/rootfiles//s444_190225_online%i.root",run_nr);
-  //  TString outputFileName = Form("/home/land/PSPX/rootfiles_tests/s444_tests/test_online%i.root",run_nr);
+    TString outputFileName = "/lustre/land/sstorck/rootfiles/s473/pspx_run" + runNumber + "_mapped_testonline.root";
+
     TString ntuple_options = "RAW,PSPX";
     // TString ucesb_dir = getenv("UCESB_DIR");
     // TString ucesb_path = ucesb_dir + "/../upexps/jun16Xe/jun16Xe";
-//    TString ucesb_path = "/lynx/Lynx/land/usr/land/landexp/kvi2018/upexps/kvi2018/kvi2018_001_060"; //--allow-errors
-        //TString ucesb_path = "/home/land/upexps/kvi2018/kvi2018";
-    
-    
-      //  TString ucesb_path = "/home/land/upexps/kvi2018/kvi2018"; //standalone unpacker
-        //TString ucesb_path = "/u/sstorck/upexps/201902_s473/201902_s473 --allow-errors"; //main daq unpacker
-        // TString ucesb_path = "/u/sstorck/upexps/pspx_califafw/pspx_califawr --allow-errors"; //main daq unpacker
-        // TString ucesb_path = "/u/sstorck/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; //Sn, alpha19
-        TString ucesb_path = "/u/land/fake_cvmfs/9.13/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; //official unpacker for Sn
-    // TString ucesb_path = "/lynx/Lynx/land/usr/land/landexp/201810_s444/upexps/201810_s444/201810_s444";
-    // //--allow-errors not yet working, PSPX not yet included
 
-    
+    // TString ucesb_path = "/u/sstorck/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; //Sn, alpha19
+    TString ucesb_path =
+        "/u/land/fake_cvmfs/9.13/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; // official unpacker for Sn
+    // --allow-errors
+
     TString pspxpar_dir = "/u/sstorck/R3BRoot/psp/par/";
     TString parPspxMappedFileName = "s444_pspx_mapped_6det.par";
     TString parPspxPrecalFileName = "s473_precal.par";
@@ -74,10 +61,10 @@ void unpack_pspx_online_s515(Int_t run_nr = 200, Int_t RunId = 200)
 
     // for data taken with an alpha source during the preparation of the phase0 experiments. only one detector read out
     // with a single filter
-   // TString parPspxMappedFileName = "alpha18_pspx_mapped.par";
-   // TString parPspxPrecalFileName = Form("alpha18_det%d_pspx_precal.par", detector);
-   // TString parPspxCalFileName = Form("alpha18_det%d_pspx_cal.par", detector);
-   // TString parPspxHitFileName = "alpha18_pspx_hit_default.par";
+    // TString parPspxMappedFileName = "alpha18_pspx_mapped.par";
+    // TString parPspxPrecalFileName = Form("alpha18_det%d_pspx_precal.par", detector);
+    // TString parPspxCalFileName = Form("alpha18_det%d_pspx_cal.par", detector);
+    // TString parPspxHitFileName = "alpha18_pspx_hit_default.par";
 
     EXT_STR_h101 ucesb_struct;
     R3BUcesbSource* source =
@@ -91,7 +78,7 @@ void unpack_pspx_online_s515(Int_t run_nr = 200, Int_t RunId = 200)
     const Int_t refresh = 100; // refresh rate for saving
     FairRunOnline* run = new FairRunOnline(source);
     run->SetRunId(RunId);
-    run->ActivateHttpServer(refresh,2405);
+    run->ActivateHttpServer(refresh, 1234);
 
     // To see the canvases open an internet browser and open localhost:8080 on the same machine or machinename:8080 from
     // within the same network
@@ -150,10 +137,10 @@ void unpack_pspx_online_s515(Int_t run_nr = 200, Int_t RunId = 200)
     /* Initialize ------------------------------------------- */
     run->Init();
     rtdb1->print();
-      //  FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
+    //  FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
     //    FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
-     FairLogger::GetLogger()->SetLogScreenLevel("ERROR");
-    //FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("ERROR");
+    // FairLogger::GetLogger()->SetLogScreenLevel("INFO");
 
     /* Run -------------------------------------------------- */
     run->Run((nev < 0) ? nev : 0, (nev < 0) ? 0 : nev);
