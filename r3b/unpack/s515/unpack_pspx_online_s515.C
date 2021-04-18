@@ -26,10 +26,10 @@ typedef struct EXT_STR_h101_t
  * Init() to a propriate number, recompile.
  */
 
-void unpack_pspx_online_s515(Int_t run_nr = 200, Int_t RunId = 200)
+void unpack_pspx_online_s515(Int_t RunId = 133)
 {
     //    Int_t RunId=100;
-    TString runNumber = Form("%04d", RunId);
+    TString runNumber = Form("%d", RunId);
     TStopwatch timer;
     timer.Start();
 
@@ -37,27 +37,27 @@ void unpack_pspx_online_s515(Int_t run_nr = 200, Int_t RunId = 200)
     // const Int_t nev = 200;
     /* Create source using ucesb for input ------------------ */
 
-    //  TString filename = "trans://lxir123:8030 --allow-errors"; //Main DAQ, Eventbuilder
-    TString filename = "/lustre/hebe/r3b/201902_s473/main" + runNumber + "_0001.lmd";
+    // TString filename = "trans://x86l-99 --allow-errors"; 
+    TString filename = "/d/land5/pspx/alpha_2021/pspx2_alpha_run" + runNumber + "_00*.lmd";
+    //TString filename = "/lustre/hebe/r3b/201902_s473/main" + runNumber + "_0001.lmd";
 
     // Eventbuilder
     //   TString outputFileName = "/tmp/pspx_stream_test.root";
-    TString outputFileName = "/lustre/land/sstorck/rootfiles/s473/pspx_run" + runNumber + "_mapped_testonline.root";
+    TString outputFileName = "/lustre/land/sstorck/rootfiles/alpha_2021/pspx2_alpha_run" + runNumber + "_online.root";
 
     TString ntuple_options = "RAW,PSPX";
     // TString ucesb_dir = getenv("UCESB_DIR");
-    // TString ucesb_path = ucesb_dir + "/../upexps/jun16Xe/jun16Xe";
 
-    // TString ucesb_path = "/u/sstorck/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; //Sn, alpha19
     TString ucesb_path =
-        "/u/land/fake_cvmfs/9.13/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; // official unpacker for Sn
-    // --allow-errors
+	// "/u/land/fake_cvmfs/9.13/upexps/202006_test/202006_test --input-buffer=100Mi";
+	// "/u/sstorck/upexps/202006_test/202006_test --input-buffer=100Mi";
+	"/u/sstorck/upexps/pspx/pspx --input-buffer=100Mi --allow-errors";
 
     TString pspxpar_dir = "/u/sstorck/R3BRoot/psp/par/";
-    TString parPspxMappedFileName = "s444_pspx_mapped_6det.par";
-    TString parPspxPrecalFileName = "s473_precal.par";
-    TString parPspxCalFileName = "s473_cal.par";
-    TString parPspxHitFileName = "s473_hit.par";
+    TString parPspxMappedFileName = "default_mapped_1psp.par";
+    TString parPspxPrecalFileName = "default_precal_1psp.par";
+    TString parPspxCalFileName = "default_cal_1psp.par";
+    TString parPspxHitFileName = "default_hit_1psp.par";
 
     // for data taken with an alpha source during the preparation of the phase0 experiments. only one detector read out
     // with a single filter

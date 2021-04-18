@@ -21,6 +21,7 @@ typedef struct EXT_STR_h101_t
   //EXT_STR_h101_LOS_onion_t los;
   EXT_STR_h101_unpack_t unpack;
   EXT_STR_h101_PSP_onion_t psp;
+  EXT_STR_h101_TPAT_t tpat;
 } EXT_STR_h101;
 
 void unpack_beam_pspx(Int_t RunId=12)
@@ -42,14 +43,14 @@ void unpack_beam_pspx(Int_t RunId=12)
   
     //TString outputFileName = "/home/land/PSPX/rootfiles_tests/s473_tests/pspx_run"+runNumber+"_mapped.root";
 //    TString outputFileName = "/u/sstorck/nyx2/sstorck/rootfiles/s473/Sn_pspx_run"+runNumber+"_mapped.root";//posrun9_precal
-    TString outputFileName = "/lustre/land/sstorck/rootfiles/s473/pspx_run"+runNumber+"_mapped_testoldscript.root";//posrun9_precal
+    TString outputFileName = "/lustre/land/sstorck/rootfiles/s473/pspx_run"+runNumber+"_hit_hitpar.root";//posrun9_precal
 
-    TString ntuple_options = "RAW,PSPX";
+    TString ntuple_options = "RAW,PSPX,TPAT";
     //TString ucesb_dir = getenv("UCESB_DIR");
     //TString ucesb_path = ucesb_dir + "/../upexps/jun16Xe/jun16Xe";
     //TString ucesb_path = "/home/land/upexps/kvi2018/kvi2018";
-    TString ucesb_path = "/u/sstorck/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; //Sn, alpha19
-    // TString ucesb_path = "/u/land/fake_cvmfs/9.13/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; //official unpacker for Sn 
+    // TString ucesb_path = "/u/sstorck/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; //Sn, alpha19
+    TString ucesb_path = "/u/land/fake_cvmfs/9.13/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; //official unpacker for Sn 
     //TString ucesb_path = "/u/sstorck/upexps/201810_s444/201810_s444 --allow-errors";
     //TString ucesb_path = "/u/sstorck/upexps/201902_s444/201902_s444 ";
     //TString ucesb_path = "/home/land/upexps/alpha18/kvi2018";
@@ -70,6 +71,7 @@ void unpack_beam_pspx(Int_t RunId=12)
     //TString parPspxCalFileName = "s444_pspx_cal_run197_en123_6det.par";
     // TString parPspxHitFileName = "s444_pspx_hit_default_6det.par";
     TString parPspxHitFileName = "s473_hit.par";
+    // TString parPspxHitFileName = "s473_hit_default.par";
     
     //TString parPspxPrecalFileName = "kvi2018_pspx_precal_default.par";
     //TString parPspxMappedFileName = "kvi2018_pspx_mapped.par";
@@ -90,6 +92,7 @@ void unpack_beam_pspx(Int_t RunId=12)
     source->AddReader( new R3BUnpackReader ((EXT_STR_h101_unpack*)&ucesb_struct.unpack, offsetof(EXT_STR_h101, unpack)) );
   //  source->AddReader( new R3BLosReader ((EXT_STR_h101_LOS*)&ucesb_struct.los, offsetof(EXT_STR_h101, los)) );
     source->AddReader( new R3BPspxReader((EXT_STR_h101_PSP*)&ucesb_struct.psp, offsetof(EXT_STR_h101, psp)) );
+    source->AddReader(new R3BTrloiiTpatReader((EXT_STR_h101_TPAT*)&ucesb_struct.tpat, offsetof(EXT_STR_h101, tpat)));
    
     
    /* Create online run ------------------------------------ */

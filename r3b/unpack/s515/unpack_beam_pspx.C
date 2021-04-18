@@ -24,32 +24,37 @@ typedef struct EXT_STR_h101_t
     EXT_STR_h101_PSP_onion_t psp;
 } EXT_STR_h101;
 
-void unpack_beam_pspx(Int_t RunId = 12)
+void unpack_beam_pspx(Int_t RunId = 1)
 {
     TString runNumber = Form("%04d", RunId);
     TStopwatch timer;
     timer.Start();
 
     const Int_t nev = -1; /* number of events to read, -1 - until CTRL+C */
-    // const Int_t nev = 200;
+    // const Int_t nev = 20000;
 
     /* Create source using ucesb for input ------------------ */
 
-    TString filename = "/lustre/hebe/r3b/201902_s473/main" + runNumber + "_0001.lmd";
+//	 TString filename="trans://x86l-30 --allow-errors";
+    TString filename = "/d/land1/202103_s455/lmd/pspx_run6_notrace_longfilter_0001.lmd";
 
     TString outputFileName =
-        "/lustre/land/sstorck/rootfiles/s473/pspx_run" + runNumber + "_mapped_testonline.root"; // posrun9_precal
+        Form("/u/sstorck/pspx_2433-21_Pb_run%i.root", RunId); 
 
     TString ntuple_options = "RAW,PSPX";
 
     TString ucesb_path =
-        "/u/land/fake_cvmfs/9.13/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; // official unpacker for Sn
+        //"/u/land/fake_cvmfs/9.13/upexps/201902_s473/201902_s473 --input-buffer=100Mi"; // official unpacker for Sn
+        // "/u/land/fake_cvmfs/9.13/upexps/202006_test/202006_test --input-buffer=100Mi"; // official unpacker for 202006_test
+        "/u/sstorck/upexps/202006_test/202006_test --input-buffer=100Mi"; // 
 
     TString pspxpar_dir = "/u/sstorck/R3BRoot/psp/par/";
-    TString parPspxMappedFileName = "s444_pspx_mapped_6det.par";
-    TString parPspxPrecalFileName = "s473_precal.par";
-    TString parPspxCalFileName = "s473_cal.par";
-    TString parPspxHitFileName = "s473_hit.par";
+    TString parPspxMappedFileName = "default_mapped_1psp.par";
+    // TString parPspxPrecalFileName = "default_precal_3psps.par";
+    TString parPspxPrecalFileName = "default_precal_1psp.par";
+    TString parPspxCalFileName = "default_cal_1psp.par";
+    // TString parPspxCalFileName = "default_cal_3psps.par";
+    TString parPspxHitFileName = "default_hit_1psp.par";
 
     EXT_STR_h101 ucesb_struct;
     R3BUcesbSource* source =
@@ -87,15 +92,15 @@ void unpack_beam_pspx(Int_t RunId = 12)
 
     /* Add analysis task ------------------------------------ */
 
-    R3BPspxMapped2Precal* pspxMapped2Precal = new R3BPspxMapped2Precal("PspxMapped2Precal", 1);
-    run->AddTask(pspxMapped2Precal);
-    R3BPspxPrecal2Cal* pspxPrecal2Cal = new R3BPspxPrecal2Cal("PspxPrecal2Cal", 1);
-    run->AddTask(pspxPrecal2Cal);
-    R3BPspxCal2Hit* pspxCal2Hit = new R3BPspxCal2Hit("PspxCal2Hit", 1);
-    run->AddTask(pspxCal2Hit);
+   R3BPspxMapped2Precal* pspxMapped2Precal = new R3BPspxMapped2Precal("PspxMapped2Precal", 1);
+   run->AddTask(pspxMapped2Precal);
+   R3BPspxPrecal2Cal* pspxPrecal2Cal = new R3BPspxPrecal2Cal("PspxPrecal2Cal", 1);
+   run->AddTask(pspxPrecal2Cal);
+   R3BPspxCal2Hit* pspxCal2Hit = new R3BPspxCal2Hit("PspxCal2Hit", 1);
+   run->AddTask(pspxCal2Hit);
 
     /* Initialize ------------------------------------------- */
-    std::cout << "TEST  ****************************************** " << endl;
+    // std::cout << "TEST  ****************************************** " << endl;
     ((R3BPspxPrecalPar*)FairRuntimeDb::instance()->getContainer("R3BPspxPrecalPar")) /*->printparams()*/;
     run->Init();
     rtdb1->print();
