@@ -22,5 +22,4 @@ SET_TESTS_PROPERTIES(run_aladin_digi PROPERTIES PASS_REGULAR_EXPRESSION "Digitiz
 
 add_subdirectory(califa)
 add_subdirectory(land)
-add_subdirectory(s438b)
 
