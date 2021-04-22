@@ -51,6 +51,13 @@ void field()
     TArc* a1 = new TArc(329.574, -50.137, 3.);
     a1->Draw();
 
+    TVector3 p_origin(0., 0., 163.4);
+    //p_origin.RotateY(14.*TMath::DegToRad());
+    TArc* a0 = new TArc(p_origin.Z(), p_origin.X(), 5.);
+    a0->SetLineColor(2);
+    a0->SetFillColor(2);
+    a0->Draw();
+
     // 3D Plot ================================================================
 
     // Ranges for the histogram
