@@ -58,7 +58,7 @@ void ams_online()
     TString amsmapfilename = amsdir + "Ams_mapping.par";
     amsmapfilename.ReplaceAll("//", "/");
     // Parameters for AMS calibration (pedestals)
-    TString amscalfilename = amsdir + "Ams_pedestals_1March_2021.par";
+    TString amscalfilename = amsdir + "Ams_CalPar_20210427.par";
     amscalfilename.ReplaceAll("//", "/");
 
     // UCESB configuration ----------------------------------
@@ -88,8 +88,18 @@ void ams_online()
     }
     ucesb_path.ReplaceAll("//", "/");
 
-    // Create source using ucesb for input ------------------
+    // Load ucesb structure ---------------------------------
     EXT_STR_h101 ucesb_struct;
+    
+    // Create online run ------------------------------------
+    FairRunOnline* run = new FairRunOnline();
+    R3BEventHeader* EvntHeader = new R3BEventHeader();
+    run->SetEventHeader(EvntHeader);
+    run->SetRunId(1);
+    run->SetSink(new FairRootFileSink(outputFileName));
+    run->ActivateHttpServer(refresh, port);
+
+    // Create source using ucesb for input ------------------
     R3BUcesbSource* source =
         new R3BUcesbSource(filename, ntuple_options, ucesb_path, &ucesb_struct, sizeof(ucesb_struct));
     source->SetMaxEvents(nev);
@@ -105,11 +115,7 @@ void ams_online()
     unpackams->SetOnline(NOTstoremappeddata);
     source->AddReader(unpackams);
 
-    // Create online run ------------------------------------
-    FairRunOnline* run = new FairRunOnline(source);
-    run->SetRunId(1);
-    run->SetSink(new FairRootFileSink(outputFileName));
-    run->ActivateHttpServer(refresh, port);
+    run->SetSource(source);
 
     // Runtime data base ------------------------------------
     FairRuntimeDb* rtdb = run->GetRuntimeDb();

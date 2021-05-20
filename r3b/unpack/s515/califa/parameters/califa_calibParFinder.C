@@ -42,14 +42,19 @@ void califa_calibParFinder()
     // Parameters for CALIFA
     TString dir = gSystem->Getenv("VMCWORKDIR");
     TString califamapdir = dir + "/macros/r3b/unpack/s515/califa/parameters/";
-    TString califamapfilename = califamapdir + "Califa_Mapping_3March2021.par";
+    TString califamapfilename = califamapdir + "CALIFA_mapping_s515.par";
     califamapfilename.ReplaceAll("//", "/");
 
     // CALIFA output file with parameters for calibrating in keV
-    TString outputCalFile = "Califa_CalPar_April2021.par";
+    TString outputCalFile = "Califa_CalPar_s515_23April2021.par";
 
     /* Definition of reader --------------------------------- */
     EXT_STR_h101 ucesb_struct;
+    
+    /* Create online run ------------------------------------ */
+    FairRunOnline* run = new FairRunOnline();
+    run->SetRunId(1);
+    run->SetSink(new FairRootFileSink(outputFileName));
 
     R3BUcesbSource* source =
         new R3BUcesbSource(filename, ntuple_options, ucesb_path, &ucesb_struct, sizeof(ucesb_struct));
@@ -59,10 +64,7 @@ void califa_calibParFinder()
     source->AddReader(
         new R3BCalifaFebexReader((EXT_STR_h101_CALIFA*)&ucesb_struct.califa, offsetof(EXT_STR_h101, califa)));
 
-    /* Create online run ------------------------------------ */
-    FairRunOnline* run = new FairRunOnline(source);
-    run->SetRunId(1);
-    run->SetSink(new FairRootFileSink(outputFileName));
+    run->SetSource(source);
 
     /* Runtime data base ------------------------------------ */
      FairRuntimeDb* rtdb = run->GetRuntimeDb();

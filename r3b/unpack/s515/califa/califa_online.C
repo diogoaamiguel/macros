@@ -94,8 +94,18 @@ void califa_online()
     }
     ucesb_path.ReplaceAll("//", "/");
 
-    // Create source using ucesb for input ------------------
+    // Load ucesb structure ---------------------------------
     EXT_STR_h101 ucesb_struct;
+    
+    // Create online run ------------------------------------
+    FairRunOnline* run = new FairRunOnline();
+    R3BEventHeader* EvntHeader = new R3BEventHeader();
+    run->SetEventHeader(EvntHeader);
+    run->SetRunId(1);
+    run->SetSink(new FairRootFileSink(outputFileName));
+    run->ActivateHttpServer(refresh, port);
+    
+    // Create source using ucesb for input ------------------
     R3BUcesbSource* source =
         new R3BUcesbSource(filename, ntuple_options, ucesb_path, &ucesb_struct, sizeof(ucesb_struct));
     source->SetMaxEvents(nev);
@@ -120,12 +130,8 @@ void califa_online()
     source->AddReader(unpackWRC);
     unpackcalifa->SetOnline(NOTstoremappeddata);
     source->AddReader(unpackcalifa);
-
-    // Create online run ------------------------------------
-    FairRunOnline* run = new FairRunOnline(source);
-    run->SetRunId(1);
-    run->SetSink(new FairRootFileSink(outputFileName));
-    run->ActivateHttpServer(refresh, port);
+    
+    run->SetSource(source);
 
     // Runtime data base ------------------------------------
     FairRuntimeDb* rtdb = run->GetRuntimeDb();
