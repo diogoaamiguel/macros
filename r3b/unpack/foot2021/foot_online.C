@@ -6,10 +6,10 @@
 typedef struct EXT_STR_h101_t
 {
     EXT_STR_h101_unpack_t unpack;
-    EXT_STR_h101_FOOT_t foot;
+    EXT_STR_h101_FOOT_onion_t foot;
 } EXT_STR_h101;
 
-void foot_online(const Int_t nev = -1,const Int_t fRunId = 1, const Int_t fExpId = 1)
+void foot_online(const Int_t nev = -1, const Int_t fRunId = 1, const Int_t fExpId = 1)
 {
     TString cRunId = Form("%04d", fRunId);
     TString cExpId = Form("%03d", fExpId);
@@ -20,28 +20,28 @@ void foot_online(const Int_t nev = -1,const Int_t fRunId = 1, const Int_t fExpId
     auto tm = *std::localtime(&t);
     std::ostringstream oss;
     oss << std::put_time(&tm, "%Y%m%d_%H%M%S");
-    TStopwatch timer;
     timer.Start();
-    
+
     Int_t refresh = 10;
     Int_t port = 8886;
 
     /* Create source using ucesb for input ------------------ */
 
-    TString filename = "--stream=lxir123:7803";
-    // TString filename = "~/lmd/ams_r4l-44_2019-09-12.lmd";
+    // TString filename = "--stream=lxir123:7803";
+    TString filename = "/lustre/r3b/202111_julich/lmd/foot004_*.lmd";
+    // TString filename = "~/lmd/julich/foot004_*.lmd";
 
-    TString outputFileName;
-    
-    TString outputpath = "/path/to/your/disk/";
-    // outputFilename = outputpath + "s"+cExpId+"_data_online_" + oss.str() + ".root";
-    outputFilename = "s" + cExpId + "_data_online_" + oss.str() + ".root";
+    TString outputFilename;
+
+    TString outputpath = "./";
+    outputFilename = outputpath + "s" + cExpId + "_data_online_" + oss.str() + ".root";
+    // outputFilename = "s" + cExpId + "_data_online_" + oss.str() + ".root";
 
     TString ntuple_options = "RAW";
     TString ucesb_dir = getenv("UCESB_DIR");
-    TString ucesb_path = ucesb_dir + "/../upexps/202111_foot/202111_foot --input-buffer=70Mi";
+    TString ucesb_path = ucesb_dir + "/../upexps/foot/foot --input-buffer=70Mi";
     ucesb_path.ReplaceAll("//", "/");
-    
+
     // Create source using ucesb for input ------------------
     EXT_STR_h101 ucesb_struct;
 
@@ -61,13 +61,14 @@ void foot_online(const Int_t nev = -1,const Int_t fRunId = 1, const Int_t fExpId
     R3BUnpackReader* unpackreader =
         new R3BUnpackReader((EXT_STR_h101_unpack*)&ucesb_struct, offsetof(EXT_STR_h101, unpack));
 
-    R3BFootReader* unpackfoot = new R3BFootReader((EXT_STR_h101_FOOT*)&ucesb_struct.foot, offsetof(EXT_STR_h101, foot));
+    R3BFootSiReader* unpackfoot =
+        new R3BFootSiReader((EXT_STR_h101_FOOT_onion*)&ucesb_struct.foot, offsetof(EXT_STR_h101, foot));
 
     /* Add readers ------------------------------------------ */
     source->AddReader(unpackreader);
-    unpackfoot->SetOnline(true);
+    // unpackfoot->SetOnline(true);
     source->AddReader(unpackfoot);
-    
+
     run->SetSource(source);
 
     /* Runtime data base ------------------------------------ */
@@ -75,11 +76,13 @@ void foot_online(const Int_t nev = -1,const Int_t fRunId = 1, const Int_t fExpId
 
     /* Add analysis task ------------------------------------ */
     R3BFootMapped2StripCal* Map2Cal = new R3BFootMapped2StripCal();
-    Map2Cal->SetOnline(true);
-    //run->AddTask(Map2Cal);
+    // Map2Cal->SetOnline(true);
+    run->AddTask(Map2Cal);
 
     /* Add online task ------------------------------------ */
     R3BFootOnlineSpectra* online = new R3BFootOnlineSpectra();
+    online->SetNbDet(3);
+    online->SetTrigger(1);
     run->AddTask(online);
 
     /* Initialize ------------------------------------------- */
@@ -98,7 +101,7 @@ void foot_online(const Int_t nev = -1,const Int_t fRunId = 1, const Int_t fExpId
     Double_t ctime = timer.CpuTime();
     std::cout << std::endl << std::endl;
     std::cout << "Macro finished succesfully." << std::endl;
-    std::cout << "Output file is " << outputFileName << std::endl;
+    std::cout << "Output file is " << outputFilename << std::endl;
     std::cout << "Real time " << rtime << " s, CPU time " << ctime << " s" << std::endl << std::endl;
     // gApplication->Terminate();
 }
