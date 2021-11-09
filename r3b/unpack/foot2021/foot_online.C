@@ -24,15 +24,13 @@ void foot_online(const Int_t nev = -1, const Int_t fRunId = 1, const Int_t fExpI
 
     Int_t refresh = 10;
     Int_t port = 8886;
-
-    /* Create source using ucesb for input ------------------ */
+    Bool_t NOTstoredata = true; // if true, don't store data in the root file
 
     // TString filename = "--stream=lxir123:7803";
     TString filename = "/lustre/r3b/202111_julich/lmd/foot004_*.lmd";
     // TString filename = "~/lmd/julich/foot004_*.lmd";
 
     TString outputFilename;
-
     TString outputpath = "./";
     outputFilename = outputpath + "s" + cExpId + "_data_online_" + oss.str() + ".root";
     // outputFilename = "s" + cExpId + "_data_online_" + oss.str() + ".root";
@@ -42,9 +40,6 @@ void foot_online(const Int_t nev = -1, const Int_t fRunId = 1, const Int_t fExpI
     TString ucesb_path = ucesb_dir + "/../upexps/foot/foot --input-buffer=70Mi";
     ucesb_path.ReplaceAll("//", "/");
 
-    // Create source using ucesb for input ------------------
-    EXT_STR_h101 ucesb_struct;
-
     // Create online run ------------------------------------
     R3BEventHeader* EvntHeader = new R3BEventHeader();
     FairRunOnline* run = new FairRunOnline();
@@ -52,6 +47,9 @@ void foot_online(const Int_t nev = -1, const Int_t fRunId = 1, const Int_t fExpI
     run->SetRunId(fRunId);
     run->SetSink(new FairRootFileSink(outputFilename));
     run->ActivateHttpServer(refresh, port);
+
+    // Create source using ucesb for input ------------------
+    EXT_STR_h101 ucesb_struct;
 
     R3BUcesbSource* source =
         new R3BUcesbSource(filename, ntuple_options, ucesb_path, &ucesb_struct, sizeof(ucesb_struct));
@@ -66,7 +64,7 @@ void foot_online(const Int_t nev = -1, const Int_t fRunId = 1, const Int_t fExpI
 
     /* Add readers ------------------------------------------ */
     source->AddReader(unpackreader);
-    // unpackfoot->SetOnline(true);
+    unpackfoot->SetOnline(NOTstoredata);
     source->AddReader(unpackfoot);
 
     run->SetSource(source);
@@ -76,8 +74,12 @@ void foot_online(const Int_t nev = -1, const Int_t fRunId = 1, const Int_t fExpI
 
     /* Add analysis task ------------------------------------ */
     R3BFootMapped2StripCal* Map2Cal = new R3BFootMapped2StripCal();
-    // Map2Cal->SetOnline(true);
+    Map2Cal->SetOnline(NOTstoredata);
     run->AddTask(Map2Cal);
+
+    R3BFootStripCal2Hit* Cal2Hit = new R3BFootStripCal2Hit();
+    Cal2Hit->SetOnline(NOTstoredata);
+    run->AddTask(Cal2Hit);
 
     /* Add online task ------------------------------------ */
     R3BFootOnlineSpectra* online = new R3BFootOnlineSpectra();
