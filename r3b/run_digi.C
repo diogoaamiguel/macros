@@ -36,7 +36,7 @@ void run_digi()
     run->AddTask(psp_digitizer);
 
     // Fi4,5,6
-    R3BFi4Digitizer* Fi4_digitizer = new R3BFi4Digitizer(0.001,0.01,1);
+    R3BFiberDigitizer* Fi4_digitizer = new R3BFiberDigitizer("Fi4",0.001,0.01,1);
     run->AddTask(Fi4_digitizer);
 
     // sfi
