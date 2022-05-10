@@ -76,17 +76,17 @@ void run_gen_sim()
     run->AddModule(califa);
 
     // Fi4 detector
-    run->AddModule(new R3BFiber("4","fi4_v17a.geo.root", DetectorId::kFI4,
+    run->AddModule(new R3BFiber("Fi4","fi4_v17a.geo.root", DetectorId::kFI4,
                               { -73.274339 - TMath::Tan(TMath::DegToRad() * 16.7) * 100, 0.069976, 513.649524 + 100. },
                               { "", -90., 16.7, 90. }));
 
     // Fi6 detector
-    run->AddModule(new R3BFiber("6","fi6_v17a.geo.root", DetectorId::kFI6,
+    run->AddModule(new R3BFiber("Fi6","fi6_v17a.geo.root", DetectorId::kFI6,
                               { -73.274339 - TMath::Tan(TMath::DegToRad() * 16.7) * 500, 0.069976, 513.649524 + 500. },
                               { "", -90., 16.7, 90. }));
 
     // Fi5 detector
-    run->AddModule(new R3BFiber("5","fi5_v17a.geo.root", DetectorId::kFI5,
+    run->AddModule(new R3BFiber("Fi5","fi5_v17a.geo.root", DetectorId::kFI5,
                               { -73.274339 - TMath::Tan(TMath::DegToRad() * 16.7) * 300, 0.069976, 513.649524 + 300. },
                               { "", -90., 16.7, 90. }));
 
