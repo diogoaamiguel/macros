@@ -21,7 +21,7 @@ void run_sim(Int_t nNeutrons = 4, Int_t nEvents = 100, Int_t beamE = 600, Int_t 
     TString outFile = "sim." + TString(str);
     TString parFile = "par." + TString(str);
 
-    TString transport = "TGeant4";
+    TString transport = "TGeant3";
 
     Bool_t magnet = kTRUE;
     Float_t fieldScale = -0.6;
