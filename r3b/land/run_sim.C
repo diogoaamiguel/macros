@@ -1,4 +1,4 @@
-void run_sim(Int_t nNeutrons = 4, Int_t nEvents = 100, Int_t beamE = 600, Int_t Erel = 500)
+void run_sim(Int_t nNeutrons = 4, Int_t nEvents = 6, Int_t beamE = 600, Int_t Erel = 500)
 {
     Int_t d;
     if (Erel == 100)
