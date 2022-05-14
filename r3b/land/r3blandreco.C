@@ -103,7 +103,7 @@ void r3blandreco(Int_t nNeutrons = 4, Int_t nEvents = 6, Int_t beamE = 600, Int_
   cout << "Real time " << rtime << " s, CPU time " << ctime << " s" << endl;
   cout << endl;
   cout << "n_neutrons " << tracker->GetNTracks4() << endl;
-  if(tracker->GetNTracks4() > (0.5*nEvents))
+  if(tracker->GetNTracks4() >= (0.5*nEvents))
   {
     cout << " Reconstruction successful" << endl;
     cout << " All ok " << endl;
