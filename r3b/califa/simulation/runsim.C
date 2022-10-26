@@ -357,12 +357,14 @@ void runsim(Int_t nEvents = 0)
     // ----- Initialize Califa HitFinder task (from CrystalCal Level to Hit Level)
     if (fCalifaHitFinder)
     {
-        R3BCalifaCrystalCal2Hit* califaHF = new R3BCalifaCrystalCal2Hit();
-        califaHF->SetCrystalThreshold(0.000010);  // in GeV!! 0.000010 means 10 KeV
-        califaHF->SetSquareWindowAlg(0.25, 0.25); //[0.25 around 14.3 degrees, 3.2 for the complete calorimeter]
-        califaHF->SetRandomization(kTRUE);
-        califaHF->SetRandomizationFile("/home/gabri/Analysis/s455/Califa_Randomizer/histograms_full.root");
-        run->AddTask(califaHF);
+      R3BCalifaCrystalCal2Hit* CalifaCal2Hit = new R3BCalifaCrystalCal2Hit();
+        CalifaCal2Hit->SetRandomization(kFALSE);
+        CalifaCal2Hit->SetClusterWindow(0.25);
+        CalifaCal2Hit->SetCrystalThreshold(0.0001); // 100keV
+        CalifaCal2Hit->SetGammaClusterThreshold(0.002);
+        CalifaCal2Hit->SetProtonClusterThreshold(0.03);
+        CalifaCal2Hit->IsSimulation(kTRUE);
+        run->AddTask(CalifaCal2Hit);
     }
 
     // -----   Runtime database   ---------------------------------------------
