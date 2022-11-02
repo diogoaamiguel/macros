@@ -359,11 +359,11 @@ void runsim(Int_t nEvents = 0)
     {
       R3BCalifaCrystalCal2Hit* CalifaCal2Hit = new R3BCalifaCrystalCal2Hit();
         CalifaCal2Hit->SetRandomization(kFALSE);
-        CalifaCal2Hit->SetClusterWindow(0.25);
+        //CalifaCal2Hit->SetClusterWindow(0.25);
         CalifaCal2Hit->SetCrystalThreshold(0.0001); // 100keV
-        CalifaCal2Hit->SetGammaClusterThreshold(0.002);
-        CalifaCal2Hit->SetProtonClusterThreshold(0.03);
-        CalifaCal2Hit->IsSimulation(kTRUE);
+        //CalifaCal2Hit->SetGammaClusterThreshold(0.002);
+        //CalifaCal2Hit->SetProtonClusterThreshold(0.03);
+        //CalifaCal2Hit->IsSimulation(kTRUE);
         run->AddTask(CalifaCal2Hit);
     }
 
