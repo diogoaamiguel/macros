@@ -27,9 +27,8 @@ void run_digi()
     // STaRTrack
 
     //R3BStartrackHitFinder* tra_digitizer = new R3BStartrackHitFinder();  // R3BStartrackHitFinder() is obsolete
-    R3BStartrackDigit* tra_digitizer = new R3BStartrackDigit();
-
-    run->AddTask(tra_digitizer);
+    //R3BStartrackDigit* tra_digitizer = new R3BStartrackDigit();
+    //run->AddTask(tra_digitizer);
 
     // PSP
     R3BPspDigitizer* psp_digitizer = new R3BPspDigitizer();

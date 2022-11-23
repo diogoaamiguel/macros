@@ -67,7 +67,7 @@ void run_sim()
     run->AddModule(new R3BVacVesselCool(targetType, "vacvessel_v14a.geo.root"));
 
     // STaRTrack
-    run->AddModule(new R3BStartrack("startrack_v16-300_2layers.geo.root", { 0., 0., 20. }));
+    //run->AddModule(new R3BStartrack("startrack_v16-300_2layers.geo.root", { 0., 0., 20. }));
     // run->AddModule(new R3BSTaRTra("startra_v16-300_2layers.geo.root", { 0., 0., 20. }));
 
     // CALIFA
