@@ -63,8 +63,8 @@ void runsim(Int_t nEvents = 0)
     Bool_t fTracker = false; // Tracker
     TString fTrackerGeo = "ams_s444.geo.root";
 
-    Bool_t fStarTrack = false; // STaR Tracker
-    TString fStarTrackGeo = "startrack_v13a.geo.root";
+    //Bool_t fStarTrack = false; // STaR Tracker
+    //TString fStarTrackGeo = "startrack_v13a.geo.root";
 
     Bool_t fDch = false; // Drift Chambers
     TString fDchGeo = "dch_v13a.geo.root";
@@ -192,10 +192,10 @@ void runsim(Int_t nEvents = 0)
     }
 
     // STaRTrack
-    if (fStarTrack)
+    /*if (fStarTrack)
     {
         run->AddModule(new R3BStartrack(fStarTrackGeo));
-    }
+    }*/
 
     // DCH drift chambers
     if (fDch)
