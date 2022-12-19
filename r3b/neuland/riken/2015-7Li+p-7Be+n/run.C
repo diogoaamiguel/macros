@@ -157,7 +157,7 @@ void Digitize(const RunConfig& cfg)
 void run(const TString what, const TString path, const TString plist, const Int_t energy, const Double_t thresh = 0.)
 {
     FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
-    FairLogger::GetLogger()->SetLogScreenLevel("FATAL");
+    FairLogger::GetLogger()->SetLogScreenLevel("fatal");
 
     std::map<TString, std::function<void(RunConfig)>> functions;
     functions["simu"] = Simulate;

@@ -110,9 +110,9 @@ void unpack_tests_pspx(Int_t RunId=12)
     ((R3BPspxPrecalPar*)FairRuntimeDb::instance()->getContainer("R3BPspxPrecalPar"))->printparams();
     run->Init();
     rtdb1->print();
-    //    FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-    //    FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    //    FairLogger::GetLogger()->SetLogScreenLevel("warn");
+    //    FairLogger::GetLogger()->SetLogScreenLevel("debug");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     /* Run -------------------------------------------------- */
     run->Run((nev < 0) ? nev : 0, (nev < 0) ? 0 : nev);

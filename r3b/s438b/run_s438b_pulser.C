@@ -55,7 +55,7 @@ void run(Int_t runNumber)
 
     // Initialize ----------------------------------------------------------------
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
     // ---------------------------------------------------------------------------
 
     // Runtime data base ---------------------------------------------------------

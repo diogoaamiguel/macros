@@ -72,7 +72,7 @@ void Simulate(const RunConfig& cfg)
     // Logging
     run.SetStoreTraj(false);
     FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
-    FairLogger::GetLogger()->SetLogScreenLevel("FATAL");
+    FairLogger::GetLogger()->SetLogScreenLevel("fatal");
 
     // Init & Special MC Settings
     run.Init();

@@ -17,7 +17,7 @@
 
 void results_ams_hit(){
 
-    //DEBUG  (optional)   -----------------------------------------------------
+    //debug  (optional)   -----------------------------------------------------
     gDebug = 0;
 
     //STYLE   -----------------------------------------------------------------		
@@ -84,7 +84,7 @@ void results_ams_hit(){
       }
 
       nbdethit = amsHitData[h]->GetDetId();
-      if(nbdethit>=nbdet){std::cout << ">> ERROR in the number of detectors" << std::endl; continue;}
+      if(nbdethit>=nbdet){std::cout << ">> error in the number of detectors" << std::endl; continue;}
 
       hams[nbdethit]->Fill(amsHitData[h]->GetX(),amsHitData[h]->GetY());
      }

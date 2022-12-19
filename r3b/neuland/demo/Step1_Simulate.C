@@ -47,7 +47,7 @@ void Step1_Simulate(
 
     // Further setup options and initialization
     FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
-    FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
+    FairLogger::GetLogger()->SetLogScreenLevel("warn");
     run->SetStoreTraj(kTRUE);
     run->Init();
 

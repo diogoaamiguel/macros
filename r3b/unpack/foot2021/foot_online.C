@@ -89,9 +89,9 @@ void foot_online(const Int_t nev = -1, const Int_t fRunId = 1, const Int_t fExpI
 
     /* Initialize ------------------------------------------- */
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
-    // FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-    // FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
+    // FairLogger::GetLogger()->SetLogScreenLevel("warn");
+    // FairLogger::GetLogger()->SetLogScreenLevel("debug");
     /* ------------------------------------------------------ */
 
     /* Run -------------------------------------------------- */

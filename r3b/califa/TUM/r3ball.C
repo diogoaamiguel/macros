@@ -74,7 +74,7 @@ void r3ball(Int_t nEvents = 1,
   run->SetOutputFile(OutFile.Data());          // Output file
   FairRuntimeDb* rtdb = run->GetRuntimeDb();
 
-  FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
+  FairLogger::GetLogger()->SetLogScreenLevel("debug");
 
   //  R3B Special Physics List in G4 case
   if ( (fUserPList  == kTRUE ) &&

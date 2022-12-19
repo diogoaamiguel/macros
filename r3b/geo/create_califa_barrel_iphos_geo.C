@@ -126,7 +126,7 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
         points[counter].SetXYZ(
             (x - target_ref.X()) / 10, (y - target_ref.Y()) / 10, (z - target_ref.Z()) / 10); // in cm;
         if (points[counter].X() > 100 || points[counter].Y() > 100 || points[counter].Z() > 100)
-            cout << "WARNING: points exceed top volume!!" << endl;
+            cout << "warn: points exceed top volume!!" << endl;
         counter++;
         // printf("x=%8f, y=%8f, z=%8f\n",x,y,z);
     }
@@ -142,7 +142,7 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
         points_cry[counter].SetXYZ(
             (x - target_ref.X()) / 10, (y - target_ref.Y()) / 10, (z - target_ref.Z()) / 10); // in cm;
         if (points_cry[counter].X() > 100 || points_cry[counter].Y() > 100 || points_cry[counter].Z() > 100)
-            cout << "WARNING: points exceed top volume!!" << endl;
+            cout << "warn: points exceed top volume!!" << endl;
         counter++;
         // printf("x=%8f, y=%8f, z=%8f\n",x,y,z);
     }
@@ -410,7 +410,7 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
 
     // length checks
     /*
-    cout << "Check alveoli length (below 1 microns). No ERROR message indicates that all is ok..." << endl;
+    cout << "Check alveoli length (below 1 microns). No error message indicates that all is ok..." << endl;
     for(Int_t i=0;i<N_ALV_TYPES;i++) cout << halfLengthAlv[i] << "\t";
     cout << endl;
     for(Int_t i=0;i<N_ALV_TYPES;i++) cout << halfLengthAlv_inner[i] << "\t";
@@ -418,16 +418,16 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
     for(Int_t i=0;i<N_ALV_TYPES;i++){
       for(Int_t j=0;j<8;j++){
         if(abs(abs(points_local[i*16+j].Z())-halfLengthAlv[i]) > 0.0001) {
-      cout << "ERROR! Check alv problem at i=" << i << ", j=" << j<< endl;
+      cout << "error! Check alv problem at i=" << i << ", j=" << j<< endl;
       cout << abs(points_local[i*8+j].Z()) << " " << halfLengthAlv[i] << endl;
         }
         if(abs(abs(points_local[i*16+j+8].Z())-halfLengthAlv_inner[i]) > 0.0001) {
-      cout << "ERROR! Check inner alv problem at i=" << i << ", j=" << j<< endl;
+      cout << "error! Check inner alv problem at i=" << i << ", j=" << j<< endl;
       cout << abs(points_local[i*8+j+8].Z()) << " " << halfLengthAlv_inner[i] << endl;
         }
       }
     }
-    cout << "Check crystal length (deviation below 1 micron). No ERROR message indicates that all is ok..." << endl;
+    cout << "Check crystal length (deviation below 1 micron). No error message indicates that all is ok..." << endl;
     for(Int_t i=0;i<N_ALV_TYPES;i++) cout << halfLengthCry[i] << "\t";
     cout << endl;
     for(Int_t i=0;i<N_ALV_TYPES;i++){
@@ -436,15 +436,15 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
       //cout << "  i=" << i << ",  k=" << k <<  ",  j=" << j <<  ",  a=" << i*8+j
       //     <<",  b=" << (i-1)*32+k*8+j+8 << ",  c=" << (i-19)*24+k*8+j+584 << endl;
       if(i== 0 && k==0 && abs(abs(points_cry_local[i*8+j].Z())-halfLengthCry[i]) > 0.0001) {
-        cout << "ERROR! Check crystal problem at i=0" << ", j=" << j << endl;
+        cout << "error! Check crystal problem at i=0" << ", j=" << j << endl;
         cout << abs(points_cry_local[i*8+j].Z()) << " " << halfLengthCry[i] << endl;
       }
       else if(i> 0 && i< 19 && abs(abs(points_cry_local[(i-1)*32+k*8+j+8].Z())-halfLengthCry[i]) > 0.0001) {
-        cout << "ERROR! Check crystal problem at i=" << i << ", j=" << j << ", k=" << k << endl;
+        cout << "error! Check crystal problem at i=" << i << ", j=" << j << ", k=" << k << endl;
         cout << abs(points_cry_local[(i-1)*32+k*8+j+8].Z()) << " " << halfLengthCry[i] << endl;
       }
       else if(i>18 && k<3 && abs(abs(points_cry_local[(i-19)*24+k*8+j+584].Z())-halfLengthCry[i]) > 0.0001) {
-        cout << "ERROR! Check crystal problem at i=" << i << ", j=" << j << ", k=" << k << endl;
+        cout << "error! Check crystal problem at i=" << i << ", j=" << j << ", k=" << k << endl;
         cout << abs(points_cry_local[(i-19)*24+k*8+j+584].Z()) << " " << halfLengthCry[i] << endl;
       }
         }

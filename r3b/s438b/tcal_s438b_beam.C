@@ -64,7 +64,7 @@ TString cosmicParFileName    = dirIn1 + "params_" + strCosmicRunNumber + "_cosmi
 
     // Initialize ----------------------------------------------------------------
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
     // ---------------------------------------------------------------------------
 
     // Run -----------------------------------------------------------------------

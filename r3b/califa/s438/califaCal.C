@@ -33,7 +33,7 @@ void califaCal(TString inputFile="", TString outputFile="",
   timer.Start();
   // ------------------------------------------------------------------------
   
-  FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+  FairLogger::GetLogger()->SetLogScreenLevel("info");
   // -----   Create analysis run   ----------------------------------------
   FairRunAna* fRun = new FairRunAna();
   fRun->SetSource(new FairFileSource(inputFile));

@@ -43,7 +43,7 @@ void Step1_Simulate(const UInt_t particleID,
 
     // Further setup options and initialization
     FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
-    FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
+    FairLogger::GetLogger()->SetLogScreenLevel("warn");
     run->SetStoreTraj(kFALSE);
     run->Init();
 

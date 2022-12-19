@@ -108,9 +108,9 @@ void finder_mapped2calpar()
 
     /* Initialize ------------------------------------------- */
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
-    // FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-    // FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
+    // FairLogger::GetLogger()->SetLogScreenLevel("warn");
+    // FairLogger::GetLogger()->SetLogScreenLevel("debug");
 
     // Choose Root or Ascii file
     // 1-Root file with the Calibartion Parameters

@@ -103,7 +103,7 @@ void unpack_ucesb()
 
 	/* Initialize ------------------------------------------- */
 	run->Init();
-	FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+	FairLogger::GetLogger()->SetLogScreenLevel("info");
 	/* ------------------------------------------------------ */
 
 	/* Runtime data base ------------------------------------ */

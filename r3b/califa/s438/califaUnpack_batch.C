@@ -64,7 +64,7 @@ void califaUnpack_batch(TString inputFile="", Int_t firstFileNumber=-999, Int_t 
 
     // Initialize ----------------------------------------------------------------
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
     // ---------------------------------------------------------------------------
 
     // Run -----------------------------------------------------------------------

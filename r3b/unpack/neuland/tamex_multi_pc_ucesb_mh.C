@@ -93,7 +93,7 @@ void tamex_multi_pc_ucesb_mh(TString runNumber)
 
 	/* Initialize ------------------------------------------- */
 	run->Init();
-	FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+	FairLogger::GetLogger()->SetLogScreenLevel("info");
 	/* ------------------------------------------------------ */
 
 

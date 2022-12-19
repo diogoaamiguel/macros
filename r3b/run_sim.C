@@ -216,7 +216,7 @@ void run_sim()
     run->SetStoreTraj(storeTrajectories);
 
     FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     // -----   Initialize simulation run   ------------------------------------
     TRandom3 random(randomSeed);

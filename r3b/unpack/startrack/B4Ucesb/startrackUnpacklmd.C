@@ -81,7 +81,7 @@
   // Initialize ----------------------------------------------------------------
   //run->Init();
   //((TTree*)gFile->Get("cbmsim"))->SetMaxTreeSize(maxSize);
-  //FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+  //FairLogger::GetLogger()->SetLogScreenLevel("info");
   // ---------------------------------------------------------------------------
 
   

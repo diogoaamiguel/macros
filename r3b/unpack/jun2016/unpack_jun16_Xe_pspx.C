@@ -101,9 +101,9 @@ void unpack_jun16_Xe_pspx(Int_t RunId = 111)
     /* Initialize ------------------------------------------- */
     run->Init();
     rtdb1->print();
-    //    FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-    //    FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    //    FairLogger::GetLogger()->SetLogScreenLevel("warn");
+    //    FairLogger::GetLogger()->SetLogScreenLevel("debug");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     /* Run -------------------------------------------------- */
 #ifdef RUN_ONLINE

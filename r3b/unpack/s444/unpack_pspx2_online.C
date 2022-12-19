@@ -152,10 +152,10 @@ void unpack_pspx2_online(Int_t run_nr = 1, Int_t date = 180821, Int_t detector =
     /* Initialize ------------------------------------------- */
     run->Init();
     rtdb1->print();
-      //  FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-    //    FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
-     FairLogger::GetLogger()->SetLogScreenLevel("ERROR");
-    //FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+      //  FairLogger::GetLogger()->SetLogScreenLevel("warn");
+    //    FairLogger::GetLogger()->SetLogScreenLevel("debug");
+     FairLogger::GetLogger()->SetLogScreenLevel("error");
+    //FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     /* Run -------------------------------------------------- */
     run->Run((nev < 0) ? nev : 0, (nev < 0) ? 0 : nev);

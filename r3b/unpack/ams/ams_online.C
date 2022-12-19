@@ -85,9 +85,9 @@ void ams_online()
 
     /* Initialize ------------------------------------------- */
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
-    // FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-    // FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
+    // FairLogger::GetLogger()->SetLogScreenLevel("warn");
+    // FairLogger::GetLogger()->SetLogScreenLevel("debug");
     /* ------------------------------------------------------ */
 
     /* Run -------------------------------------------------- */

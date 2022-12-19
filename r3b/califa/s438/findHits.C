@@ -19,7 +19,7 @@ void findHits(TString inputFile="", TString outputFile="", Int_t nEvents = 0)
 
 
   fRun->Init();
-  FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+  FairLogger::GetLogger()->SetLogScreenLevel("info");
 //  FairLogger::GetLogger()->SetLogVerbosityLevel("HIGH");
 
   fRun->Run(0,nEvents);

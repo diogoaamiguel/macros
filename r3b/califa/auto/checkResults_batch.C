@@ -259,7 +259,7 @@ void checkResults_batch(Int_t totalEvents=1, Int_t fGeoVer=1, Double_t threshold
 	Long64_t nevents = TCrystal->GetEntries();
 	cout << " NEvents: " << nevents << endl;
 	if(nevents!= totalEvents * multiplicity) 
-		cout << "WARNING: The number of events ("<< nevents 
+		cout << "warn: The number of events ("<< nevents 
 			<<") in the tree is not totalEvents*multiplicity ("<< totalEvents<<"*"<<multiplicity<<") !!"<<endl;
 
 	Int_t crystalHitsPerEvent=0;

@@ -34,7 +34,7 @@ void fragment_fitter()
     
     // Initialize --------------------------------------------------------------
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     // -------------------------------------------------------------------------
     

@@ -48,7 +48,7 @@ void run(Int_t runNumber, Int_t pulserRunNumber)
 
     // Initialize ----------------------------------------------------------------
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
     // ---------------------------------------------------------------------------
 
     // Run -----------------------------------------------------------------------

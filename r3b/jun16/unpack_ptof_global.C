@@ -174,8 +174,8 @@ unpack_ptof(Int_t RunId)
 	run->Init();
 	/*rtdb1->print();*/
 
-	/* Set log level either to WARNING, DEBUG or ERROR */
-	FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
+	/* Set log level either to warn, debug or error */
+	FairLogger::GetLogger()->SetLogScreenLevel("warn");
 
 	/* Run -------------------------------------------------- */
 	run->Run((nev < 0) ? nev : 0, (nev < 0) ? 0 : nev);

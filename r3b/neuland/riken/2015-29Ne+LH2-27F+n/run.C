@@ -119,7 +119,7 @@ void Digitize(const RunConfig& cfg)
 void run(const TString what, const TString path)
 {
     FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     std::map<TString, std::function<void(RunConfig)>> functions;
     functions["simu"] = Simulate;

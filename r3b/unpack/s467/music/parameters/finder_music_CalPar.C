@@ -206,9 +206,9 @@ void finder_music_CalPar()
     else
     {
         if (fMwpc1 && fMwpc2)
-            std::cout << "ERROR::MWPC1 and MWPC2 cannot be used at the same time." << std::endl;
+            std::cout << "error::MWPC1 and MWPC2 cannot be used at the same time." << std::endl;
         else
-            std::cout << "ERROR::You must select MWPC1 or MWPC2 for calibration." << std::endl;
+            std::cout << "error::You must select MWPC1 or MWPC2 for calibration." << std::endl;
         gApplication->Terminate();
     }
 
@@ -222,7 +222,7 @@ void finder_music_CalPar()
 
     // Initialize -------------------------------------------
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     // Ascii file with the Calibartion Parameters
     FairParAsciiFileIo* parIo = new FairParAsciiFileIo();

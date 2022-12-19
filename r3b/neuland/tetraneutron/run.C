@@ -262,7 +262,7 @@ void run(const TString what,
 {
     const RunConfig cfg(path, distance, energy, erel, nDoublePlanes, nNeutrons);
 
-    // FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
+    // FairLogger::GetLogger()->SetLogScreenLevel("debug");
     if (what == "simu")
     {
         Simulate(cfg);

@@ -2,6 +2,6 @@
 {
   gSystem->Load("libGenVector");
 
-  cout << "[INFO] geometry macros for R3BRoot" << endl;
+  cout << "[info] geometry macros for R3BRoot" << endl;
 }
 

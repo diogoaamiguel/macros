@@ -94,9 +94,9 @@ void califa_calParFinder() {
 
   /* Initialize ------------------------------------------- */
   run->Init();
-  //    FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-  //    FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
-  FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+  //    FairLogger::GetLogger()->SetLogScreenLevel("warn");
+  //    FairLogger::GetLogger()->SetLogScreenLevel("debug");
+  FairLogger::GetLogger()->SetLogScreenLevel("info");
 
   
   //Choose Root or Ascii file	

@@ -134,9 +134,9 @@ void unpack_kvi2018_pspx(Int_t RunId = 17)
     /* Initialize ------------------------------------------- */
     run->Init();
     rtdb1->print();
-    //    FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-    //    FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    //    FairLogger::GetLogger()->SetLogScreenLevel("warn");
+    //    FairLogger::GetLogger()->SetLogScreenLevel("debug");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     /* Run -------------------------------------------------- */
     run->Run((nev < 0) ? nev : 0, (nev < 0) ? 0 : nev);

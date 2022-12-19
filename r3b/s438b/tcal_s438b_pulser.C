@@ -51,7 +51,7 @@ void run(Int_t runNumber, Int_t refRun)
     // Initialize ----------------------------------------------------------------
     run->Init();
     rtdb->print();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
     // ---------------------------------------------------------------------------
 
     // Run -----------------------------------------------------------------------

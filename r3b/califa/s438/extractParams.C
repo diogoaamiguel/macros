@@ -54,7 +54,7 @@ void extractParams(TString inputFile="" , TString outputFile1="", TString output
       gain = (energy2 - energy1) / (fitPar_2[1]-fitPar_1[1]);
       offset = - gain * fitPar_1[1]+ energy1;
     }
-    else cout << "ERROR!!! pars failed!!" << endl;
+    else cout << "error!!! pars failed!!" << endl;
     
     //checking
     if( gain*fitPar_1[1]+offset-energy1>epsilon) cout <<"CALIBRATION WRONG!"<<endl;

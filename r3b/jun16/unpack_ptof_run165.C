@@ -118,8 +118,8 @@ unpack_ptof_run165(Int_t RunId = 165)
 
 	run->Init();
 
-	/* Set log level either to WARNING, DEBUG or ERROR */
-	FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
+	/* Set log level either to warn, debug or error */
+	FairLogger::GetLogger()->SetLogScreenLevel("warn");
 
 	/* Run -------------------------------------------------- */
 	run->Run((nev < 0) ? nev : 0, (nev < 0) ? 0 : nev);

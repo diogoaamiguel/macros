@@ -23,7 +23,7 @@
 
 void run(TString inputFilePattern, TString outputFileName, Int_t nevents=-1)
 {
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     TStopwatch timer;
     timer.Start();
@@ -81,7 +81,7 @@ void run(TString inputFilePattern, TString outputFileName, Int_t nevents=-1)
 
     // Initialize ----------------------------------------------------------------
     run->Init();
-//    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+//    FairLogger::GetLogger()->SetLogScreenLevel("info");
     // ---------------------------------------------------------------------------
 
     // Run -----------------------------------------------------------------------

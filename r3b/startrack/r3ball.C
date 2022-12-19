@@ -475,7 +475,7 @@ void r3ball(Int_t nEvents = 1,
     run->SetStoreTraj(fVis);
 
     FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     // -----   Initialize simulation run   ------------------------------------
     run->Init();

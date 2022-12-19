@@ -230,7 +230,7 @@ void run_sim(Int_t nNeutrons = 4, Int_t nEvents = 6, Int_t beamE = 600, Int_t Er
     run->SetStoreTraj(storeTrajectories);
 
     FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     // -----   Initialize simulation run   ------------------------------------
     run->Init();

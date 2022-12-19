@@ -61,7 +61,7 @@ void unpack_ucesb_tacquila()
 
     /* Initialize ------------------------------------------- */
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    FairLogger::GetLogger()->SetLogScreenLevel("info");
     /* ------------------------------------------------------ */
 
     /* Runtime data base ------------------------------------ */

@@ -112,8 +112,8 @@ calib_ptof_run165(Int_t RunId = 165)
 	/* Initialize ------------------------------------------- */
 	run->Init();
 
-	/* Set log level either to WARNING, DEBUG or ERROR */
-	FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+	/* Set log level either to warn, debug or error */
+	FairLogger::GetLogger()->SetLogScreenLevel("info");
 
 	/* Run -------------------------------------------------- */
 	run->Run((nev < 0) ? nev : 0, (nev < 0) ? 0 : nev);

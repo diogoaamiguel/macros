@@ -58,7 +58,7 @@ void califaFindPidCal(TString inputFile, TString outputFile,
   
 
   fRun->Init();       
-  FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+  FairLogger::GetLogger()->SetLogScreenLevel("info");
              
   fRun->Run(0,nEvents);
   

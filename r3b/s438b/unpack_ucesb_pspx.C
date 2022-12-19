@@ -101,7 +101,7 @@ void unpack_ucesb_pspx()
 
 	/* Initialize ------------------------------------------- */
 	run->Init();
-	FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
+	FairLogger::GetLogger()->SetLogScreenLevel("warn");
 	/* ------------------------------------------------------ */
 
 	/* Runtime data base ------------------------------------ */

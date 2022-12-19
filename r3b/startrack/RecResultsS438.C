@@ -872,7 +872,7 @@ void RecResultsS438(char* output) {
 		cout << "The number of events is: "<< nevents <<endl;
 
 	if(nevents!= totalEvents * multiplicity) 
-		cout << "WARNING: The number of events ("<< nevents 
+		cout << "warn: The number of events ("<< nevents 
 			<<") in the tree is not totalEvents*multiplicity ("<< totalEvents<<"*"<<multiplicity<<") !!"<<endl;
 
 	Int_t nb = 0;

@@ -81,7 +81,7 @@ void make_pedestal_file_r3broot(){
    double a2;
    *file >> b;
    *file2>> b1;
-   if(b!=b1){cout<<"ERROR"<<endl; break;}
+   if(b!=b1){cout<<"error"<<endl; break;}
    //cout << b << endl;
    for(int ch=0;ch<1024;ch++){/*scanf("%x", &hex );  cout << hex << endl;printf ("You have entered %#x %d.\n",hex, hex);*/
    *file >> a;

@@ -1,5 +1,5 @@
 if [ "$#" -ne 1 ] ; then
- echo "ERROR!! At least one arguments should be provided (type of db)" 1>&2
+ echo "error!! At least one arguments should be provided (type of db)" 1>&2
 else
  source ~/Work/r3broot/macros/r3b/db/califa/dbconfigo.sh local_pgsql > /dev/null
  if [ "$?" -eq "0" ]; then
@@ -26,7 +26,7 @@ else
    fi
   fi
  else
-  echo "ERROR!! dbconfig is not available" 1>&2
+  echo "error!! dbconfig is not available" 1>&2
  fi
 fi
  

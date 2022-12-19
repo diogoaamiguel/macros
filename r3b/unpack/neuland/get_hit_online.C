@@ -83,6 +83,6 @@ void get_hit_online()
 
     // -------------------------------------------
     run->Init();
-    FairLogger::GetLogger()->SetLogScreenLevel("ERROR");
+    FairLogger::GetLogger()->SetLogScreenLevel("error");
     run->Run((nev < 0) ? nev : 0, (nev < 0) ? 0 : nev);
 }

@@ -69,7 +69,7 @@ void run(TString inputFile="", Int_t firstFileNumber=-999, Int_t lastFileNumber=
 
     // Initialize ----------------------------------------------------------------
     run->Init();
-//    FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+//    FairLogger::GetLogger()->SetLogScreenLevel("info");
     // ---------------------------------------------------------------------------
 
     // Run -----------------------------------------------------------------------

@@ -129,9 +129,9 @@ void califa_calibParFinder() {
   
   /* Initialize ------------------------------------------- */
   run->Init();
-  //    FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-  //    FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
-  FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+  //    FairLogger::GetLogger()->SetLogScreenLevel("warn");
+  //    FairLogger::GetLogger()->SetLogScreenLevel("debug");
+  FairLogger::GetLogger()->SetLogScreenLevel("info");
 
 
   /* Output file for calibration parameters ----------------*/

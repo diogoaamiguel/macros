@@ -137,10 +137,10 @@ void unpack_pspx_online_s515(Int_t RunId = 133)
     /* Initialize ------------------------------------------- */
     run->Init();
     rtdb1->print();
-    //  FairLogger::GetLogger()->SetLogScreenLevel("WARNING");
-    //    FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
-    FairLogger::GetLogger()->SetLogScreenLevel("ERROR");
-    // FairLogger::GetLogger()->SetLogScreenLevel("INFO");
+    //  FairLogger::GetLogger()->SetLogScreenLevel("warn");
+    //    FairLogger::GetLogger()->SetLogScreenLevel("debug");
+    FairLogger::GetLogger()->SetLogScreenLevel("error");
+    // FairLogger::GetLogger()->SetLogScreenLevel("info");
 
     /* Run -------------------------------------------------- */
     run->Run((nev < 0) ? nev : 0, (nev < 0) ? 0 : nev);

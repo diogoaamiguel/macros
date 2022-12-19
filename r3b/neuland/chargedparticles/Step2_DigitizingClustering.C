@@ -13,7 +13,7 @@ void Step2_DigitizingClustering(const TString simFile)
     const TString outFile = (TString(simFile).ReplaceAll(".sim.", ".digi."));
 
     FairRunAna* run = new FairRunAna();
-    // FairLogger::GetLogger()->SetLogScreenLevel("DEBUG");
+    // FairLogger::GetLogger()->SetLogScreenLevel("debug");
     run->SetSource(new FairFileSource(simFile);
     run->SetOutputFile(outFile);
     ConnectParFileToRuntimeDb(parFile, run->GetRuntimeDb());

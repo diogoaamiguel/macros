@@ -29,9 +29,9 @@ Unpacking: (example with 10 files of run 140925, from 0100 to 0110, 22Na calib. 
 	   $ root -l
 	   root [0] .L califaUnpack.C
 	   root [1] run("na22_", 100, 110)
-	   [INFO   ] 0 events, multiplicity:  1
+	   [info   ] 0 events, multiplicity:  1
 	   ...
-	   [INFO   ] 25281800 events, multiplicity:  1
+	   [info   ] 25281800 events, multiplicity:  1
 
 	   Macro finished succesfully.
 	   Output file is ./data/na22__raw.root
@@ -245,7 +245,7 @@ Adding the parameters to r3broot: (example from the outcome of the previous poin
 
 
 -------------------------------------------------------------------------------------------------
-ADDITIONAL INFO FOR THE INITIALIZATION OF THE CALIBRATION PARAMETER CONTAINERS (OLD INFO):
+ADDITIONAL info FOR THE INITIALIZATION OF THE CALIBRATION PARAMETER CONTAINERS (OLD info):
 
 	   For the initial (only first time) creation of the calibration parameters container, 
 	   a macro r3broot/macros/r3b/db/califa/califa_test.C creates a root file from the
@@ -264,7 +264,7 @@ ADDITIONAL INFO FOR THE INITIALIZATION OF THE CALIBRATION PARAMETER CONTAINERS (
  	   s: NrOfDUnits:  Int_t  128 n: 10
  	   s: 0:   Double_t  \  n: 1
 	   ...
-	   [INFO   ] ***  CalifaCrystalCalPar written to ROOT file   version: 1
+	   [info   ] ***  CalifaCrystalCalPar written to ROOT file   version: 1
 	   --------------------------------------------------------------------------------
 	   --------------  actual containers in runtime database  -------------------------
 	   CalifaCrystalCalPar                                     Califa Calib Parameters
