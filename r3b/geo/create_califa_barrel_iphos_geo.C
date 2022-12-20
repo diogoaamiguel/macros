@@ -1,4 +1,16 @@
 // FINAL CALIFA CARREL + iPHOS
+// Usage after loading:
+// create_califa_barrel_iphos_geo(A, B, C)
+// A: geoTag. Name tagging the output root file.
+// B: known alignment for some experiments
+//    [nominal, s522, s509, s455, s515, s494, s444, s467]
+// C: File with Installed Crystal
+//    [./califa_AllCrystalsInstalled.txt,
+//     ./califa_InstalledCrystals_March2021.txt,
+//     ./califa_InstalledCrystals_Nov2019.txt]
+// Requires file CLF-ALL-oneCrystal.txt for crystals coordinates
+// Requires file CLF-ALL-onePart.txt for alveoli coordinates
+
 #include "TGeoManager.h"
 #include "TMath.h"
 #include <iomanip>
@@ -7,13 +19,73 @@
 TGeoRotation* fRefRot = NULL;
 TGeoManager* gGeoMan = NULL;
 
-Bool_t isCrystalInstalled(Int_t alvType, Int_t alveolusCopy)
-{
-    return true;
-}
+Bool_t isCrystalInstalled(Int_t alvType, Int_t alveolusCopy, Int_t instCry[]);
 
-void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
+void create_califa_barrel_iphos_geo(const char* geoTag = "v2023.1",
+                                    const char* expNumber = "nominal",
+                                    const char* installedCrystalsFile = "./califa_AllCrystalsInstalled.txt")
 {
+    if( (strncmp(expNumber,"s522",4) == 0 &&
+         strncmp(installedCrystalsFile,"./califa_InstalledCrystals_March2021.txt",40)!= 0) ||
+        (strncmp(expNumber,"s509",4) == 0 &&
+         strncmp(installedCrystalsFile,"./califa_InstalledCrystals_March2021.txt",40)!= 0) ||
+        (strncmp(expNumber,"s455",4) == 0 &&
+         strncmp(installedCrystalsFile,"./califa_InstalledCrystals_March2021.txt",40)!= 0) ||
+        (strncmp(expNumber,"s515",4) == 0 &&
+         strncmp(installedCrystalsFile,"./califa_InstalledCrystals_March2021.txt",40)!= 0) ||
+        (strncmp(expNumber,"s494",4) == 0 &&
+         strncmp(installedCrystalsFile,"./califa_InstalledCrystals_March2021.txt",40)!= 0) ||
+        (strncmp(expNumber,"s444",4) == 0 &&
+         strncmp(installedCrystalsFile,"./califa_InstalledCrystals_March2021.txt",40)!= 0) ||
+        (strncmp(expNumber,"s467",4) == 0 &&
+         strncmp(installedCrystalsFile,"./califa_InstalledCrystals_Nov2019.txt",38)!= 0) )
+    {
+        std::cout << std::endl
+                  << "WARNING: Using a non-standard combination of experiment number (" << expNumber
+                  << ") and installed crystals file (" << installedCrystalsFile << ")" << std::endl;
+        std::cout << "\033[33m" << "  -> Is this really what you want??" << " \033[0m" << std::endl;
+    }
+    std::cout << std::endl << " geoTag: "
+              << "\033[33m" << geoTag << " \033[0m" << std::endl;
+    std::cout << " alignment (nominal or experiment code): "
+              << "\033[33m" << expNumber << " \033[0m" << std::endl;
+    std::cout << " installed Crystals File: "
+              << "\033[33m" << installedCrystalsFile << " \033[0m" << std::endl << std::endl;
+
+    if(strncmp(expNumber,"s522",4) == 0 || strncmp(expNumber,"s509",4) == 0 ||
+       strncmp(expNumber,"s494",4) == 0 ||
+       strncmp(expNumber,"s444",4) == 0 || strncmp(expNumber,"s467",4) == 0 )
+          std::cout << "\033[31m No alignment data for this experiment yet \033[0m "
+                    << std::endl  << std::endl;
+
+    ifstream wc1;
+    wc1.open(installedCrystalsFile);
+    if(wc1.fail())
+    {
+      std::cout << "\033[31m FATAL ERROR: Unable to open file or read problem in \033[0m "
+                << "\033[31m" << installedCrystalsFile << " \033[0m" << std::endl << std::endl;
+      return;
+    }
+
+    Int_t installedCrystals[2432];
+    Int_t read = 0;
+    Int_t crycounter = 0;
+    for (Int_t i = 0; i < 2432; i++) installedCrystals[i] = 0;
+    while (1)
+    { // reading the file with all alveoli vertices
+        wc1 >> read;
+        if (!wc1.good()){
+            break;
+          }
+        if(crycounter>2431) {
+            std::cout << "\033[31m FATAL ERROR: more lines than crystals in the file \033[0m "
+                      << "\033[31m" << installedCrystalsFile << " \033[0m" << std::endl << std::endl;
+            return;
+        }
+        installedCrystals[crycounter] = read;
+        crycounter++;
+    }
+
     // -------   Load media from media file   -------------------------
     FairGeoLoader* geoLoad = new FairGeoLoader("TGeo", "FairGeoLoader");
     FairGeoInterface* geoFace = geoLoad->getGeoInterface();
@@ -77,7 +149,7 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
                                           59.,  // Rmax
                                           (55.+70)/2.); // half length
     auto trans0 = new TGeoCombiTrans("trans0", 0., 0., 7.5, fRefRot);
-    trans0->RegisterYourself();                                        
+    trans0->RegisterYourself();
 
     TGeoShape* pCBWorldIn1 = new TGeoTube("Califa_Centerpart1", // hole to accommodate the tracker
                                           0.,                   // Rmin
@@ -85,7 +157,7 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
                                           130/2.);              // half length
     auto trans1 = new TGeoCombiTrans("trans1", 0., 0., 7.5, fRefRot);
     trans1->RegisterYourself();
-    
+
     auto Part2 = new TGeoSphere("Part2", 38., 73.5, 7., 90., 0., 360.);
     auto trans2 = new TGeoCombiTrans("trans2", 0, 0, 0., fRefRot);
     trans2->RegisterYourself();
@@ -96,7 +168,7 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
     auto t0 = new TGeoCombiTrans(0., 0., 0., fRefRot);
     top->AddNode(pWorld, 0, t0);
 
-    // FINAL CALIFA CARREL + iPHOS VERSION (NOV 2019)
+    // FINAL CALIFA CARREL + iPHOS VERSION (SINCE NOV 2019)
     const Int_t N_ALV_TYPES = 23; // alveolar structures
     const Int_t N_CRY_TYPES = 85; // crystal elements
 
@@ -107,7 +179,7 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
     Float_t x, y, z;
 
     Double_t wrapping_thickness = 0.0065; // in cm.
-    // target reference in mm. OFFSET FROM UVIGO
+    // target reference in mm. OFFSET INFO FROM UVIGO
     TVector3 target_ref(4.1, 2304.0809, 325.0);
 
     // 23 geometries, 8 vertices, outer and inner: (23*8*2)
@@ -491,7 +563,6 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
         Alv_vol[i]->SetVisibility(kTRUE);
         Alv_vol[i]->SetVisContainers(kTRUE);
 
-        // TODO: CHANGE VACUUM TO AIR!!!
         Alv_inner_vol[i] = gGeoManager->MakeArb8(
             AlvGlobalNameInner + name_Alv[i], pAirMedium, halfLengthAlv_inner[i], vertices_inner_Alv[i]);
         Alv_inner_vol[i]->SetLineColor(kRed);
@@ -606,18 +677,34 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
         { // rotation around Z
             // rotAlvFinal[i * 32 + j] = new TGeoRotation((*rotOnZ[j]) * (*rotAlv[i]));
             // alv_cm_rot[2 * i] = (*rotationOnZ[j]) * alv_cm[2 * i];
+
+            Double_t disp_halfBarrel=0;
+            if(strncmp(expNumber,"s455",4) == 0 || strncmp(expNumber,"s515",4) == 0) {
+                if (j < 16)
+                    disp_halfBarrel = 1.25;
+                else
+                    disp_halfBarrel = -1.25;
+            }
+
             if (i > 18 && j > 7)
                 continue;
 
             if (i > 18)
             {
+                if(strncmp(expNumber,"s455",4) == 0 || strncmp(expNumber,"s515",4) == 0) {
+                    if (j < 4)
+                        disp_halfBarrel = 1.25;
+                    else
+                        disp_halfBarrel = -1.25;
+                }
+
                 rotAlvFinal[i * 32 + 4 * j] = new TGeoRotation((*rotOnZ[4 * j]) * (*rotAlv[i]));
                 alv_cm_rot[2 * i] = (*rotationOnZ[4 * j]) * alv_cm[2 * i];
-                if (isCrystalInstalled(i + 1, j))
+                if (isCrystalInstalled(i + 1, j, installedCrystals))
                 {
                     pWorld->AddNode(Alv_vol[i],
                                     j,
-                                    new TGeoCombiTrans(alv_cm_rot[2 * i].X(),
+                                    new TGeoCombiTrans(alv_cm_rot[2 * i].X() + disp_halfBarrel,
                                                        alv_cm_rot[2 * i].Y(),
                                                        alv_cm_rot[2 * i].Z(),
                                                        rotAlvFinal[i * 32 + 4 * j]));
@@ -627,11 +714,11 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
             {
                 rotAlvFinal[i * 32 + j] = new TGeoRotation((*rotOnZ[j]) * (*rotAlv[i]));
                 alv_cm_rot[2 * i] = (*rotationOnZ[j]) * alv_cm[2 * i];
-                if (isCrystalInstalled(i + 1, j))
+                if (isCrystalInstalled(i + 1, j, installedCrystals))
                 {
                     pWorld->AddNode(Alv_vol[i],
                                     j,
-                                    new TGeoCombiTrans(alv_cm_rot[2 * i].X(),
+                                    new TGeoCombiTrans(alv_cm_rot[2 * i].X() + disp_halfBarrel,
                                                        alv_cm_rot[2 * i].Y(),
                                                        alv_cm_rot[2 * i].Z(),
                                                        rotAlvFinal[i * 32 + j]));
@@ -647,11 +734,39 @@ void create_califa_barrel_iphos_geo(const char* geoTag = "v23.1")
   gGeoMan->PrintOverlaps();
   gGeoMan->Test();
 
-    TFile* geoFile = new TFile(geoFileName, "RECREATE");
-    top->Write();
-    // top->Draw();
-    geoFile->Close();
+  TFile* geoFile = new TFile(geoFileName, "RECREATE");
+  top->Write();
+  // top->Draw();
+  geoFile->Close();
 
-    std::cout << "\033[34m Creating geometry:\033[0m "
+  std::cout << " Creating geometry: "
             << "\033[33m" << geoFileName << " \033[0m" << std::endl;
+}
+
+Bool_t isCrystalInstalled(Int_t alvType, Int_t alveolusCopy, Int_t instCry[])
+{
+    // reproduces partially the algorithm of R3BCalifaGeometry::GetCrystalId(const char* volumePath)
+    Bool_t found = kFALSE;
+    Int_t crystalId = 0;
+    Int_t cryType = 1;  // first crystal of the alveoli... if not present, alveoli is removed.
+
+    if (alvType == 1)
+        crystalId = 1 + alveolusCopy; // first alveoli ring, one crystal per alveolus
+    else if (alvType < 20)
+        crystalId = 33 + (alvType - 2) * 128 + alveolusCopy * 4 + (cryType - 1); // four crystal per alveolus
+    else
+        crystalId = 2337 + (alvType - 20) * 24 + alveolusCopy * 3 + (cryType - 1); // three crystal per alveolus
+
+    if (crystalId < 1 || crystalId > 2432)
+    { // crystalId runs from 1 to 2432
+        cout << "R3BCalifaGeometry: Wrong crystal number ";
+        cout << "---- crystalId: " << crystalId << endl;
+        return 0;
+    }
+    for (Int_t i = 0; i < 2432; i++)
+    {
+        if (crystalId == instCry[i])
+            found = kTRUE;
+    }
+    return found;
 }
