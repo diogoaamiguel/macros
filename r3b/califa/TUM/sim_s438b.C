@@ -134,8 +134,8 @@ Int_t sim_s438b(const char *path, int ID){
    // Magnet Field definition
    Bool_t fR3BMagnet = kFALSE;
 	
-   // Including CalifaHitFinder task (kFALSE by default)
-   Bool_t fCalifaHitFinder = kTRUE; 
+   // Including CalifaClusterFinder task (kFALSE by default)
+   Bool_t fCalifaClusterFinder = kTRUE; 
 
    // Including StarTrackHitFinder task (kFALSE by default)
    Bool_t fStarTrackHitFinder = kFALSE;
@@ -151,7 +151,7 @@ Int_t sim_s438b(const char *path, int ID){
 	  fGene,
 	  fUserPList,
 	  fR3BMagnet,
-	  fCalifaHitFinder,
+	  fCalifaClusterFinder,
 	  fStarTrackHitFinder,
 	  fMeasCurrent,
 	  OutFile,

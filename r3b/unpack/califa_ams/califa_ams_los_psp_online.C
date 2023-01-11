@@ -196,8 +196,8 @@ void califa_ams_los_psp_online() {
   R3BCalifaMapped2CrystalCal* Map2CalCalifa = new R3BCalifaMapped2CrystalCal();
   Map2CalCalifa->SetOnline(true);
   run->AddTask(Map2CalCalifa);
-  //R3BCalifaCrystalCal2Hit ---
-  R3BCalifaCrystalCal2Hit* Cal2HitCalifa = new R3BCalifaCrystalCal2Hit();
+  //R3BCalifaCrystalCal2Cluster ---
+  R3BCalifaCrystalCal2Cluster* Cal2HitCalifa = new R3BCalifaCrystalCal2Cluster();
   Cal2HitCalifa->SelectGeometryVersion(444);
   Cal2HitCalifa->SetSquareWindowAlg(0.25,0.25);   //[0.25 around 14.3 degrees, 3.2 for the complete calorimeter]
   Cal2HitCalifa->SetDetectionThreshold(200);    //200 KeV

@@ -10,7 +10,7 @@ void runsim(Int_t nEvents = 0)
     Bool_t fUserPList = false;      // Use of R3B special physics list
     Bool_t fR3BMagnet = true;       // Magnetic field definition
     Bool_t fCalifaDigitizer = true; // Apply hit digitizer task
-    Bool_t fCalifaHitFinder = true; // Apply hit finder task
+    Bool_t fCalifaClusterFinder = true; // Apply hit finder task
 
     TString fMC = "TGeant4";       // MonteCarlo engine: TGeant3, TGeant4, TFluka
     TString fGenerator = "gammas"; // Event generator type: box, gammas, r3b, ion, ascii
@@ -355,16 +355,16 @@ void runsim(Int_t nEvents = 0)
     }
 
     // ----- Initialize Califa HitFinder task (from CrystalCal Level to Hit Level)
-    if (fCalifaHitFinder)
+    if (fCalifaClusterFinder)
     {
-      R3BCalifaCrystalCal2Hit* CalifaCal2Hit = new R3BCalifaCrystalCal2Hit();
-        CalifaCal2Hit->SetRandomization(kFALSE);
-        //CalifaCal2Hit->SetClusterWindow(0.25);
-        CalifaCal2Hit->SetCrystalThreshold(0.0001); // 100keV
-        //CalifaCal2Hit->SetGammaClusterThreshold(0.002);
-        //CalifaCal2Hit->SetProtonClusterThreshold(0.03);
-        //CalifaCal2Hit->IsSimulation(kTRUE);
-        run->AddTask(CalifaCal2Hit);
+      R3BCalifaCrystalCal2Cluster* CalifaCal2Cluster = new R3BCalifaCrystalCal2Cluster();
+        CalifaCal2Cluster->SetRandomization(kFALSE);
+        //CalifaCal2Cluster->SetClusterWindow(0.25);
+        CalifaCal2Cluster->SetCrystalThreshold(0.0001); // 100keV
+        //CalifaCal2Cluster->SetGammaClusterThreshold(0.002);
+        //CalifaCal2Cluster->SetProtonClusterThreshold(0.03);
+        //CalifaCal2Cluster->IsSimulation(kTRUE);
+        run->AddTask(CalifaCal2Cluster);
     }
 
     // -----   Runtime database   ---------------------------------------------

@@ -130,9 +130,9 @@ void analEvents(Int_t analType=1, char* output) {
 
 	//Califa Hits
 	TClonesArray* caloHitCA;  
-	R3BCalifaHitData** caloHit;
-	caloHitCA = new TClonesArray("R3BCalifaHitData",5);
-	TBranch *branchCaloHit = TCal->GetBranch("CalifaHitData");
+	R3BCalifaClusterData** caloHit;
+	caloHitCA = new TClonesArray("R3BCalifaClusterData",5);
+	TBranch *branchCaloHit = TCal->GetBranch("CalifaClusterData");
 	branchCaloHit->SetAddress(&caloHitCA);
 
 	//Tracker Hits
@@ -217,12 +217,12 @@ void analEvents(Int_t analType=1, char* output) {
 			CsIPhi = new Double_t[caloHitsPerEvent+1];
 			CsITheta = new Double_t[caloHitsPerEvent+1];
 
-                        caloHit = new R3BCalifaHitData*[caloHitsPerEvent+1];
+                        caloHit = new R3BCalifaClusterData*[caloHitsPerEvent+1];
             
 			for(Int_t j=0;j<caloHitsPerEvent;j++){
                 
-				caloHit[j] = new R3BCalifaHitData;
-				caloHit[j] = (R3BCalifaHitData*) caloHitCA->At(j);
+				caloHit[j] = new R3BCalifaClusterData;
+				caloHit[j] = (R3BCalifaClusterData*) caloHitCA->At(j);
                 
 				CsIE[j] = caloHit[j]->GetEnergy();
 				CsIPhi[j] = caloHit[j]->GetPhi();	

@@ -20,7 +20,7 @@
 
 #include <R3BMCTrack.h>
 #include <R3BCalifaMappedData.h>
-#include <R3BCalifaHitData.h>
+#include <R3BCalifaClusterData.h>
 #include <R3BCalifaCrystalCalData.h>
 #include <R3BCalifaGeometry.h>
 #include <R3BDetectorList.h>
@@ -125,16 +125,16 @@ void GenChannelMapping()
     if(caloHits)
       delete caloHits;
 
-    if((b = events->GetBranch("CalifaHitData")))
+    if((b = events->GetBranch("CalifaClusterData")))
     {
-      caloHits = new TClonesArray("R3BCalifaHitData");
+      caloHits = new TClonesArray("R3BCalifaClusterData");
 //      b->SetAddress(&caloHits);
-      events->SetBranchAddress("CalifaHitData", &caloHits);
+      events->SetBranchAddress("CalifaClusterData", &caloHits);
     }
-    else if((b = events->GetBranch("califa_CalifaHitData")))
+    else if((b = events->GetBranch("califa_CalifaClusterData")))
     {
-      caloHits = new TClonesArray("R3BCalifaHitData");
-      events->SetBranchAddress("califa_CalifaHitData", &caloHits);
+      caloHits = new TClonesArray("R3BCalifaClusterData");
+      events->SetBranchAddress("califa_CalifaClusterData", &caloHits);
     }
     else
       caloHits = NULL;
@@ -215,13 +215,13 @@ public:
   {
   if(!caloHits)
   {
-    cerr << "No CalifaHitDatas found." << endl;
+    cerr << "No CalifaClusterDatas found." << endl;
     return;
   }
 
   TH1 *h = getTH1(1000, 0, 1000, "Energy (MeV)", hist);
 
-  R3BCalifaHitData *hit;
+  R3BCalifaClusterData *hit;
 
   for(Long64_t i = 0; i < n; i++)
   {
@@ -229,7 +229,7 @@ public:
 
     for(int j = 0; j < caloHits->GetEntries(); j++)
     {
-      hit = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+      hit = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
       if(usePid)
         h->Fill((hit->GetNf() + hit->GetNs()) * 1000.);
       else
@@ -268,13 +268,13 @@ public:
   {
     if(!caloHits)
     {
-      cerr << "No CalifaHitDatas found." << endl;
+      cerr << "No CalifaClusterDatas found." << endl;
       return;
     }
 
     TH2 *h = getTH2(500,0,1000,500,0,1000, "QPID Energy vs PeakSensing Energy (MeV)", hist);
 
-    R3BCalifaHitData *hit;
+    R3BCalifaClusterData *hit;
 
     for(Long64_t i = 0; i < n; i++)
     {
@@ -282,7 +282,7 @@ public:
 
       for(int j = 0; j < caloHits->GetEntries(); j++)
       {
-        hit = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+        hit = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
         h->Fill(hit->GetEnergy() * 1000., (hit->GetNf() + hit->GetNs())*1000.);
       }
     }
@@ -294,11 +294,11 @@ public:
   {
     if(!caloHits)
     {
-      cerr << "No CalifaHitDatas in tree." << endl;
+      cerr << "No CalifaClusterDatas in tree." << endl;
       return;
     }
 
-    R3BCalifaHitData *hit;
+    R3BCalifaClusterData *hit;
     h = getTH2(1000,0,500,1000,0,250, "abs(Ns - f(Nf))", h);
 
     for(Long64_t i = 0; i < n; i++)
@@ -307,7 +307,7 @@ public:
 
       for(int j = 0; j < caloHits->GetEntries(); j++)
       {
-        hit = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+        hit = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
 
         if(!cut->IsInside(1000. * hit->GetNf(), 1000. * hit->GetNs()))
           continue;
@@ -613,12 +613,12 @@ public:
   {
     if(!caloHits)
     {
-      cerr << "No CalifaHitData in tree!" << endl;
+      cerr << "No CalifaClusterData in tree!" << endl;
       return;
     }
 
     TH2 *h = getTH2(500, 0, 500, 500, 0, 500, "Ns vs Nf (MeV)", hist);
-    R3BCalifaHitData *hit;
+    R3BCalifaClusterData *hit;
 
     double r_nsnf;
 
@@ -628,7 +628,7 @@ public:
 
       for(int j = 0; j < caloHits->GetEntries(); j++)
       {
-        hit = (R3BCalifaHitData*)caloHits->At(j);
+        hit = (R3BCalifaClusterData*)caloHits->At(j);
 
 
         // Normalize PID to energy
@@ -713,12 +713,12 @@ public:
   {
     if(!caloHits)
     {
-      cerr << "No CalifaHitData in tree!" << endl;
+      cerr << "No CalifaClusterData in tree!" << endl;
       return;
     }
 
     TH2 *h = getTH2(50, 0, 180, 500, 0, 1000, "Energy vs Theta", hist);
-    R3BCalifaHitData *hit;
+    R3BCalifaClusterData *hit;
 
     for(Long64_t i = 0; i < n; i++)
     {
@@ -726,7 +726,7 @@ public:
 
       for(int j = 0; j < caloHits->GetEntries(); j++)
       {
-        hit = (R3BCalifaHitData*)caloHits->At(j);
+        hit = (R3BCalifaClusterData*)caloHits->At(j);
         h->Fill(hit->GetTheta() * 180.0 / TMath::Pi(), hit->GetEnergy() * 1000.0);
       }
     }
@@ -739,7 +739,7 @@ public:
   {
     if(!caloHits || !tracks)
     {
-      cerr << "No CalifaHitData or MCTrack in tree!" << endl;
+      cerr << "No CalifaClusterData or MCTrack in tree!" << endl;
       return;
     }
 
@@ -747,7 +747,7 @@ public:
     htheta = getTH2(50, 0, 180, 50, 0, 180, "Theta Hit vs Theta Track", htheta);
 
     R3BMCTrack *t;
-    R3BCalifaHitData *h;
+    R3BCalifaClusterData *h;
     TVector3 v;
 
     for(Long64_t i = 0; i < n; i++)
@@ -762,7 +762,7 @@ public:
 
       for(int j = 0; j < caloHits->GetEntries(); j++)
       {
-        h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+        h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
         htheta->Fill(v.Theta() * 180. / TMath::Pi(), h->GetTheta() * 180.0 / TMath::Pi());
         hphi->Fill(v.Phi() * 180. / TMath::Pi(), h->GetPhi() * 180.0 / TMath::Pi());
       }
@@ -811,7 +811,7 @@ public:
       hists[i] = new TH2I(Form("iphos_%d", i), Form("E vs DE %d", i), 250, 0, 500, 250, 200,1000);
 
     R3BMCTrack *track;
-    R3BCalifaHitData *hit;
+    R3BCalifaClusterData *hit;
     double eprim, phi, theta;
     int j, channel;
 
@@ -835,7 +835,7 @@ public:
 
       for(j = 0; j < caloHits->GetEntries(); j++)
       {
-        hit = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+        hit = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
 
         if(!cut_iphos->IsInside(hit->GetNf(), hit->GetNs()))
           continue;
@@ -895,7 +895,7 @@ public:
     TH2I *hdztheta_track = new TH2I("hdztheta_track", "iPhos", 1800, 0, 90, 1000, 0, 50);
 
     R3BMCTrack *t;
-    R3BCalifaHitData *h;
+    R3BCalifaClusterData *h;
     TVector3 startVertex, momentum, hitPos;
 
     double eprim, dz;
@@ -926,7 +926,7 @@ public:
 
       for(j = 0; j < caloHits->GetEntries(); j++)
       {
-        h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+        h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
         if(cut_iphos->IsInside(1000. * h->GetNf(), 1000. * h->GetNs()))
         {
           hdztheta->Fill(h->GetTheta()*180./TMath::Pi(), dz);
@@ -975,7 +975,7 @@ public:
     TVector3 vStart(0,0,0), vDir;
 
     R3BMCTrack *t;
-    R3BCalifaHitData *h;
+    R3BCalifaClusterData *h;
     
     double eprim, theta;
 
@@ -1002,7 +1002,7 @@ public:
 
       for(j = 0; j < caloHits->GetEntries(); j++)
       {
-        h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+        h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
         if(h->GetNbOfCrystalHits() != 1)
           continue;
 
@@ -1115,7 +1115,7 @@ public:
 //    hrespfx[3] = new TH1F("hrespfx_total", "Resolution FWHM % total", 200, 200, 1000);
 
     R3BMCTrack *t;
-    R3BCalifaHitData *h;
+    R3BCalifaClusterData *h;
     
     double eprim, theta, e_iphos, de_hit;
     double nprim;
@@ -1150,7 +1150,7 @@ public:
   
         eprim = 1000. * (t->GetEnergy() - t->GetMass());
 
-        h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+        h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
 
         if(h->GetNbOfCrystalHits() != 1)
         {
@@ -1356,7 +1356,7 @@ public:
     TH3I *hiphos = new TH3I("hiphos", "iPhos", 250, 0, 500, 250, 0, 50, 250, 200, 1000);
 
     R3BMCTrack *t;
-    R3BCalifaHitData *h;
+    R3BCalifaClusterData *h;
     TVector3 startVertex, momentum;
 
     double eprim, dz;
@@ -1385,7 +1385,7 @@ public:
 
       for(j = 0; j < caloHits->GetEntries(); j++)
       {
-        h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+        h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
         if(cut_iphos->IsInside(h->GetNf(), h->GetNs()))
           hiphos->Fill(1000. * h->GetEnergy(), dz, eprim);
       }
@@ -1432,7 +1432,7 @@ void P2P(Long64_t nMax = 0, bool usetracks = true, bool useiphos = false, bool u
 
     if(!caloHits)
     {
-      cerr << "No CalifaHitData in tree" << endl;
+      cerr << "No CalifaClusterData in tree" << endl;
       return;
     }
 
@@ -1542,7 +1542,7 @@ void P2P(Long64_t nMax = 0, bool usetracks = true, bool useiphos = false, bool u
     TRandom3 rnd;
 
     R3BMCTrack *t;
-    R3BCalifaHitData *h;
+    R3BCalifaClusterData *h;
     TVector3 v;
 
     Long64_t j;
@@ -1686,7 +1686,7 @@ void P2P(Long64_t nMax = 0, bool usetracks = true, bool useiphos = false, bool u
         eMax[0] = 0; eMax[1] = 0;
         for(j = 0; j < caloHits->GetEntries(); j++)
         {
-          h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(j));
+          h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(j));
 #if REQUIRE_DZ
           if(h->GetNbOfCrystalHits() != 1)
           {
@@ -1863,7 +1863,7 @@ void P2P(Long64_t nMax = 0, bool usetracks = true, bool useiphos = false, bool u
         bool found_matching_track;
         for(int ih = 0; ih < 2; ih++)
         {
-          h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(idxMax[ih]));
+          h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(idxMax[ih]));
           found_matching_track = false;
           for(int it = 0; it < 2; it++)
           {
@@ -1921,7 +1921,7 @@ void P2P(Long64_t nMax = 0, bool usetracks = true, bool useiphos = false, bool u
         bool found_matching_track;
         for(int ih = 0; ih < 2; ih++)
         {
-          h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(idxMax[ih]));
+          h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(idxMax[ih]));
           found_matching_track = false;
           for(int it = 0; it < startrackHits->GetEntries(); it++)
           {
@@ -1951,7 +1951,7 @@ void P2P(Long64_t nMax = 0, bool usetracks = true, bool useiphos = false, bool u
         _[1] = 1 - _[0];
         for(j = 0; j < 2; j++)
         {
-          h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(idxMax[j]));
+          h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(idxMax[j]));
           theta[_[j]] = h->GetTheta() * 180. / TMath::Pi() + rnd.Uniform(-THETA_SMEARING/2., THETA_SMEARING/2.);
           phi[_[j]] = h->GetPhi() * 180. / TMath::Pi() + rnd.Uniform(-PHI_SMEARING/2.,PHI_SMEARING/2.);
           e[_[j]] = 1000. * eMax[j];
@@ -2028,9 +2028,9 @@ void P2P(Long64_t nMax = 0, bool usetracks = true, bool useiphos = false, bool u
 
         if(Q.Mag() - MASS_RESIDUAL < -.5 && !usetracks)
         {
-          h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(idxMax[0]));
+          h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(idxMax[0]));
           hqpid_false->Fill(h->GetNf(), h->GetNs());
-          h = dynamic_cast<R3BCalifaHitData*>(caloHits->At(idxMax[1]));
+          h = dynamic_cast<R3BCalifaClusterData*>(caloHits->At(idxMax[1]));
           hqpid_false->Fill(h->GetNf(), h->GetNs());
 
           cout << i << ": " << e[0] << " MeV, " << e[1] << " MeV" << endl;

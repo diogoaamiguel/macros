@@ -21,7 +21,7 @@ void run_digi_Fi4()
     // ---------------------------------------------------------------------------
 
     // ----- Connect the Digitization Task ---------------------------------------
-    /*R3BCalifaCrystalCal2Hit* califa_digitizer = new R3BCalifaCrystalCal2Hit();
+    /*R3BCalifaCrystalCal2Cluster* califa_digitizer = new R3BCalifaCrystalCal2Cluster();
     run->AddTask(califa_digitizer);
     
     // mTOF

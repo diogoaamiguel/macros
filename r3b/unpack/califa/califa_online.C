@@ -121,8 +121,8 @@ void califa_online(){
   R3BCalifaMapped2CrystalCal* Map2Cal = new R3BCalifaMapped2CrystalCal();
   Map2Cal->SetOnline(true);
   run->AddTask(Map2Cal);
-  //R3BCalifaCrystalCal2Hit ---
-  R3BCalifaCrystalCal2Hit* Cal2Hit = new R3BCalifaCrystalCal2Hit();
+  //R3BCalifaCrystalCal2Cluster ---
+  R3BCalifaCrystalCal2Cluster* Cal2Hit = new R3BCalifaCrystalCal2Cluster();
   Cal2Hit->SetOnline(true);
   Cal2Hit->SelectGeometryVersion(444);    //444 version is for S444, S454 and S473 experiments
   Cal2Hit->SetSquareWindowAlg(0.25,0.25);     //[0.25 around 14.3 degrees, 3.2 for the complete calorimeter]

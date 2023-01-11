@@ -11,7 +11,7 @@ void findHits(TString inputFile="", TString outputFile="", Int_t nEvents = 0)
   fRun->SetOutputFile(outputFile);
 
   // Hit finder
-  R3BCalifaCrystalCal2Hit *hitFinder = new R3BCalifaCrystalCal2Hit();
+  R3BCalifaCrystalCal2Cluster *hitFinder = new R3BCalifaCrystalCal2Cluster();
   // Select s438b Demonstrator Geometry
   hitFinder->SelectGeometryVersion(0x438b);
   hitFinder->SetSquareWindowAlg(6.0*TMath::Pi()/180.0, 6.0*TMath::Pi()/180.0);    //[0.25 around 14.3 degrees, 3.2 for the complete calorimeter]

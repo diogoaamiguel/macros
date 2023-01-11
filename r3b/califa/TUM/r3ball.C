@@ -21,7 +21,7 @@
 //                         Visualization, // kFalse or kTRUE
 //                         fMC ,        // "TGeant3" or "TGeant4"
 //                         fGenerator   // Generator type
-//                         fCalifaHitFinder // Activate CalifaHitFinder task
+//                         fCalifaClusterFinder // Activate CalifaClusterFinder task
 //                                          // CrystalCalData level to HitData level
 //
 //  -------------------------------------------------------------------------
@@ -36,7 +36,7 @@ void r3ball(Int_t nEvents = 1,
             TString fGenerator = "box",
             Bool_t fUserPList = kFALSE,
             Bool_t fR3BMagnet = kTRUE,
-            Bool_t fCalifaHitFinder = kFALSE,
+            Bool_t fCalifaClusterFinder = kFALSE,
             Bool_t fStarTrackHitFinder = kFALSE,
             Double_t fMeasCurrent = 2000.,
             TString OutFile = "r3bsim.root",
@@ -434,9 +434,9 @@ void r3ball(Int_t nEvents = 1,
   FairLogger::GetLogger()->SetLogVerbosityLevel("LOW");
 
 
-  // ----- Initialize CalifaHitFinder task (CrystalCal to Hit) ------------------------------------
-  if(fCalifaHitFinder) {
-    R3BCalifaCrystalCal2Hit* califaHF = new R3BCalifaCrystalCal2Hit();
+  // ----- Initialize CalifaClusterFinder task (CrystalCal to Hit) ------------------------------------
+  if(fCalifaClusterFinder) {
+    R3BCalifaCrystalCal2Cluster* califaHF = new R3BCalifaCrystalCal2Cluster();
     califaHF->SetDetectionThreshold(0.000050);//50 KeV
     califaHF->SelectGeometryVersion(2020);
 		califaHF->SetSquareWindowAlg(0.25,0.25);    //[0.25 around 14.3 degrees, 3.2 for the complete calorimeter]

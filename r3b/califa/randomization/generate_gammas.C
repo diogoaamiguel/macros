@@ -14,7 +14,7 @@ void generate_gammas(Int_t nEvents)
 
     Bool_t fUserPList = false;      // Use of R3B special physics list
     Bool_t fCalifaDigitizer = true; // Apply hit digitizer task
-    Bool_t fCalifaHitFinder = true; // Apply hit finder task
+    Bool_t fCalifaClusterFinder = true; // Apply hit finder task
 
     TString fMC = "TGeant4";       // MonteCarlo engine: TGeant3, TGeant4, TFluka
     TString fGenerator = "box"; // Event generator type: box, gammas, r3b, ion, ascii

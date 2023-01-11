@@ -5,7 +5,7 @@
 //         Last Update: 12/04/2012
 //         Comments:
 //			Runs the CALIFA Hit Finder. Outputs a root file with
-//			a collection (TClonesArray) of R3BCalifaHits
+//			a collection (TClonesArray) of R3BCalifaClusters
 //
 //  -------------------------------------------------------------------------
 //
@@ -52,7 +52,7 @@ void califaAna_batch(Int_t nEvents=1, Int_t fGeoVer=2020, Double_t fThres=0.0000
 
 	// -----  Analysis routines for CALIFA
 
-	R3BCalifaCrystalCal2Hit* califaHF = new R3BCalifaCrystalCal2Hit();
+	R3BCalifaCrystalCal2Cluster* califaHF = new R3BCalifaCrystalCal2Cluster();
 	califaHF->SelectGeometryVersion(fGeoVer);
 	//califaHF->SelectGeometryVersion(10);
 	califaHF->SetDetectionThreshold(fThres);             //50 KeV  [fThres in GeV]

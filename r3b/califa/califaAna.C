@@ -6,7 +6,7 @@
 //         Last Update: 20/10/14
 //         Comments:
 //			Runs the CALIFA Hit Finder. Outputs a root file with
-//			a collection (TClonesArray) of R3BCalifaHitData
+//			a collection (TClonesArray) of R3BCalifaClusterData
 //
 //  -------------------------------------------------------------------------
 //
@@ -55,7 +55,7 @@ void califaAna(Int_t nEvents = 1)
     rtdb->print();
 
     // -----  Analysis routines for CALIFA
-    R3BCalifaCrystalCal2Hit* califaHF = new R3BCalifaCrystalCal2Hit();
+    R3BCalifaCrystalCal2Cluster* califaHF = new R3BCalifaCrystalCal2Cluster();
     TMap fDetList = new TMap();
     califaHF->SetGeometryFileName(((TObjString*)&fDetList.GetValue("CALIFA"))->GetString().Data());
     // Selecting the geometry version

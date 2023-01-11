@@ -60,7 +60,7 @@ def unpack(infiles, output, nev, runNo, exp, ntuple, calibration):
         rtdb.print()
         map2cal=ROOT.R3BCalifaMapped2CrystalCal()
         run.AddTask(map2cal)
-        cluster=ROOT.R3BCalifaCrystalCal2Hit()
+        cluster=ROOT.R3BCalifaCrystalCal2Cluster()
         cluster.SetConeAlg()
         cluster.SetVerbose(999);
         run.AddTask(cluster)

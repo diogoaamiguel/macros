@@ -15,10 +15,10 @@ void califaEventDisplay()
   R3BMCTracks *Track    = new R3BMCTracks ("Monte-Carlo Tracks");
 
   R3BCalifaEventDisplay    *CalifaEvtVis    = new R3BCalifaEventDisplay("R3BCalifaEventDisplay");
-  R3BCalifaHitEventDisplay *CalifaHitEvtVis = new R3BCalifaHitEventDisplay("R3BCalifaHitEventDisplay");
+  R3BCalifaClusterEventDisplay *CalifaClusterEvtVis = new R3BCalifaClusterEventDisplay("R3BCalifaClusterEventDisplay");
   CalifaEvtVis->SelectGeometryVersion(10);
   fMan->AddTask(CalifaEvtVis);
-  fMan->AddTask(CalifaHitEvtVis);
+  fMan->AddTask(CalifaClusterEvtVis);
 
   fMan->AddTask(Track);
   

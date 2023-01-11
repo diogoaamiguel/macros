@@ -202,9 +202,9 @@ void checkResults() {
 
 	//Calo Hits (output)
 	TClonesArray* caloHitCA;  
-	R3BCalifaHitData** caloHit;
-	caloHitCA = new TClonesArray("R3BCalifaHitData",5);
-	TBranch *branchCaloHit = TCrystal->GetBranch("CalifaHitData");
+	R3BCalifaClusterData** caloHit;
+	caloHitCA = new TClonesArray("R3BCalifaClusterData",5);
+	TBranch *branchCaloHit = TCrystal->GetBranch("CalifaClusterData");
 	branchCaloHit->SetAddress(&caloHitCA);
 	
 	//MCTrack(input)
@@ -257,10 +257,10 @@ void checkResults() {
 			}
 		}
 		if(caloHitsPerEvent>0) {
-			caloHit = new R3BCalifaHitData*[caloHitsPerEvent];
+			caloHit = new R3BCalifaClusterData*[caloHitsPerEvent];
 			for(Int_t j=0;j<caloHitsPerEvent;j++){
-				caloHit[j] = new R3BCalifaHitData;
-				caloHit[j] = (R3BCalifaHitData*) caloHitCA->At(j);      
+				caloHit[j] = new R3BCalifaClusterData;
+				caloHit[j] = (R3BCalifaClusterData*) caloHitCA->At(j);      
 			}
 		}		
 		if(MCtracksPerEvent>0) {

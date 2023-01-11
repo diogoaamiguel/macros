@@ -130,8 +130,8 @@ void iPhos_sim(){
    // Magnet Field definition
    Bool_t fR3BMagnet = kFALSE;
 	
-   // Including CalifaHitFinder task (kFALSE by default)
-   Bool_t fCalifaHitFinder = kTRUE; 
+   // Including CalifaClusterFinder task (kFALSE by default)
+   Bool_t fCalifaClusterFinder = kTRUE; 
 
    // Including StarTrackHitFinder task (kFALSE by default)
    Bool_t fStarTrackHitFinder = kFALSE;
@@ -147,7 +147,7 @@ void iPhos_sim(){
 	  fGene,
 	  fUserPList,
 	  fR3BMagnet,
-	  fCalifaHitFinder,
+	  fCalifaClusterFinder,
 	  fStarTrackHitFinder,
 	  fMeasCurrent,
 	  OutFile,
