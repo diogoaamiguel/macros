@@ -47,7 +47,7 @@ void runsim(Int_t nEvents = 0)
     {
 
         fCalifaGeo =
-            "califa_2020_s444.geo.root"; // Experimental Set-Up: 1204 Crystals (1024 Barrel + 180 IPhos), Jan - Feb 2020
+            "califa_v2019.11.geo.root"; // Experimental Set-Up: 1204 Crystals (1024 Barrel + 180 IPhos), Jan - Feb 2020
         fCalifaGeoVer = 2020;
         fCalifaNonU = 1.0; // Non-uniformity: 1 means +-1% max deviation
     }
@@ -55,7 +55,7 @@ void runsim(Int_t nEvents = 0)
     else
     {
 
-        fCalifaGeo = "califa_2020.geo.root";
+        fCalifaGeo = "califa_full.geo.root";
         fCalifaGeoVer = 2020;
         fCalifaNonU = 1.0; // Non-uniformity: 1 means +-1% max deviation
     }

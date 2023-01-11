@@ -71,7 +71,7 @@ void run_gen_sim()
     // run->AddModule(new R3BSTaRTra("startra_v16-300_2layers.geo.root", { 0., 0., 20. }));
 
     // CALIFA
-    R3BCalifa* califa = new R3BCalifa("califa_2020.geo.root");
+    R3BCalifa* califa = new R3BCalifa("califa_full.geo.root");
     califa->SelectGeometryVersion(2020);
     run->AddModule(califa);
 
