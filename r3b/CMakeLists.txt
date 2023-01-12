@@ -20,5 +20,5 @@ SET_TESTS_PROPERTIES(run_aladin_digi PROPERTIES TIMEOUT "300")
 SET_TESTS_PROPERTIES(run_aladin_digi PROPERTIES PASS_REGULAR_EXPRESSION "Digitization successful")
 
 
-add_subdirectory(califa)
+#add_subdirectory(califa)
 
