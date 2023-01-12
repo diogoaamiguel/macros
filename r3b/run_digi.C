@@ -21,8 +21,8 @@ void run_digi()
     // ---------------------------------------------------------------------------
 
     // ----- Connect the Digitization Task ---------------------------------------
-    R3BCalifaDigitizer* califa_digitizer = new R3BCalifaDigitizer();
-    run->AddTask(califa_digitizer);
+    //R3BCalifaDigitizer* califa_digitizer = new R3BCalifaDigitizer();
+    //run->AddTask(califa_digitizer);
 
     // STaRTrack
 
