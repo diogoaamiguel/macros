@@ -56,7 +56,7 @@ void runsim(Int_t nEvents = 0)
     {
 
         fCalifaGeo = "califa_v2021.3.geo.root";
-        fCalifaGeoVer = 2020;
+        fCalifaGeoVer = 2021;
         fCalifaNonU = 1.0; // Non-uniformity: 1 means +-1% max deviation
     }
 

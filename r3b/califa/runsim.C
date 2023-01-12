@@ -39,7 +39,7 @@ void runsim(Int_t nEvents = 0)
     Bool_t fCalifa = true;          // Califa Calorimeter
     Bool_t CalifaExpConfig = false; // Experimental Set-Up for CALIFA
     TString fCalifaGeo;
-    Int_t fCalifaGeoVer;
+    Int_t fCalifaGeoVer = 0;
     Double_t fCalifaNonU;
     TString califaSimParamsFile;
 
@@ -47,16 +47,14 @@ void runsim(Int_t nEvents = 0)
     {
 
         fCalifaGeo =
-            "califa_v2019.11.geo.root"; // Experimental Set-Up: 1204 Crystals (1024 Barrel + 180 IPhos), Jan - Feb 2020
+            "califa_v2019.11.geo.root"; // Experimental Set-Up: 1204 Crystals (1024 Barrel + 180 IPhos), November 2019
         fCalifaGeoVer = 2020;
         fCalifaNonU = 1.0; // Non-uniformity: 1 means +-1% max deviation
     }
 
     else
     {
-
         fCalifaGeo = "califa_full.geo.root";
-        fCalifaGeoVer = 2020;
         fCalifaNonU = 1.0; // Non-uniformity: 1 means +-1% max deviation
     }
 
