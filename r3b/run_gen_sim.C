@@ -72,7 +72,7 @@ void run_gen_sim()
 
     // CALIFA
     R3BCalifa* califa = new R3BCalifa("califa_full.geo.root");
-    califa->SelectGeometryVersion(2020);
+    califa->SelectGeometryVersion(2022);
     run->AddModule(califa);
 
     // Fi4 detector
