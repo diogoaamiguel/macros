@@ -22,10 +22,6 @@ void run_aladin_digi()
     R3BTof2pDigitizer* tof_digitizer = new R3BTof2pDigitizer();
     run->AddTask(tof_digitizer);
 
-    // mTOF
-    //R3BmTofDigitizer* mtof_digitizer = new R3BmTofDigitizer();
-    //run->AddTask(mtof_digitizer);
-
     // DCH
     R3BDch2pDigitizer* dch_2pdigitizer = new R3BDch2pDigitizer();
     run->AddTask(dch_2pdigitizer);

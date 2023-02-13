@@ -58,17 +58,10 @@ void run_sim()
     run->AddModule(new R3BTarget(targetType, "target_" + targetType + ".geo.root"));
 
     // GLAD
-    run->AddModule(new R3BGladMagnet("glad_v17_flange.geo.root")); // GLAD should not be moved or rotated
+    run->AddModule(new R3BGladMagnet("glad_v2023.1.geo.root")); // GLAD should not be moved or rotated
 
     // PSP
     run->AddModule(new R3BPsp("psp_v13a.geo.root", {}, -221., -89., 94.1));
-
-    // R3B SiTracker Cooling definition
-    run->AddModule(new R3BVacVesselCool(targetType, "vacvessel_v14a.geo.root"));
-
-    // STaRTrack
-    //run->AddModule(new R3BStartrack("startrack_v16-300_2layers.geo.root", { 0., 0., 20. }));
-    // run->AddModule(new R3BSTaRTra("startra_v16-300_2layers.geo.root", { 0., 0., 20. }));
 
     // CALIFA
     /*R3BCalifa* califa = new R3BCalifa("califa_full.geo.root");
