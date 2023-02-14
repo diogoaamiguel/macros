@@ -14,7 +14,7 @@ void run_sim()
     TString generator = generator1;
     TString inputFile = "";
 
-    Int_t nEvents = 1000;
+    Int_t nEvents = 100;
     Bool_t storeTrajectories = kTRUE;
     Int_t randomSeed = 335566; // 0 for time-dependent random numbers
 
@@ -58,7 +58,8 @@ void run_sim()
     run->AddModule(new R3BTarget(targetType, "target_" + targetType + ".geo.root"));
 
     // GLAD
-    run->AddModule(new R3BGladMagnet("glad_v2023.1.geo.root")); // GLAD should not be moved or rotated
+    if (nEvents > 100)
+       run->AddModule(new R3BGladMagnet("glad_v2023.1.geo.root")); // GLAD should not be moved or rotated
 
     // PSP
     run->AddModule(new R3BPsp("psp_v13a.geo.root", {}, -221., -89., 94.1));
@@ -252,15 +253,4 @@ void run_sim()
 
     cout << " Test passed" << endl;
     cout << " All ok " << endl;
-
-    // Snap a picture of the geometry
-    // If this crashes, set "OpenGL.SavePicturesViaFBO: no" in your .rootrc
-    /*gStyle->SetCanvasPreferGL(kTRUE);
-    gGeoManager->GetTopVolume()->Draw("ogl");
-    TGLViewer* v = (TGLViewer*)gPad->GetViewer3D();
-    v->SetStyle(TGLRnrCtx::kOutline);
-    v->RequestDraw();
-    v->SavePicture("run_sim-side.png");
-    v->SetPerspectiveCamera(TGLViewer::kCameraPerspXOZ, 25., 0, 0, -90. * TMath::DegToRad(), 0. * TMath::DegToRad());
-    v->SavePicture("run_sim-top.png");*/
 }
